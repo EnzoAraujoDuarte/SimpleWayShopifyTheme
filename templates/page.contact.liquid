@@ -1,0 +1,382 @@
+
+<div class="contact-page">
+  <!-- Page Header -->
+  <div class="bg-golden-gradient shadow-golden-lg border-b-4 border-golden-600 relative overflow-hidden" 
+>
+    <div class="golden-container py-6 text-center relative z-10">
+      <div class="flex items-center justify-center space-x-4">
+        <div class="text-white text-shadow-md">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <h1 class="text-2xl lg:text-3xl font-bold text-white uppercase tracking-wide text-shadow-lg">
+          {{ page.title | default: 'CONTACT' }}
+      </h1>
+      </div>
+      {% if page.content != blank %}
+        <div class="text-sm text-white/90 max-w-2xl mx-auto text-shadow-sm mt-2">
+          {{ page.content }}
+        </div>
+      {% endif %}
+    </div>
+    <!-- Background overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-golden-300/10 to-golden-500/10 pointer-events-none"></div>
+  </div>
+
+  <!-- Contact Content -->
+  <div class="golden-section">
+    <div class="golden-container">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Contact Information -->
+        <div class="golden-card mb-12 text-center golden-fade-in">
+          <div class="mb-8">
+            <p class="text-lg golden-text-primary leading-relaxed">
+              If you still need help regarding your purchase or any other matter, send an email to:
+              <br>
+              <a href="mailto:contact@store.com" class="golden-link text-xl font-bold">
+                contact@store.com
+              </a>
+            </p>
+          </div>
+
+          <div class="space-y-4 mb-8">
+            <p class="golden-text-primary text-lg">
+              <strong>Business hours: Monday to Friday from 9AM to 5PM (except holidays)</strong>
+            </p>
+            <p class="golden-text-primary text-lg">
+              <strong>Our average response time is 48 business hours.</strong>
+            </p>
+          </div>
+
+          <div class="mt-8">
+            <a href="mailto:contact@store.com" class="golden-button text-lg px-8 py-4 golden-shimmer">
+              GET IN TOUCH
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          
+          <!-- Contact Form -->
+          <div class="golden-card golden-fade-in">
+            <h2 class="golden-heading text-2xl mb-8">Send us a message</h2>
+            
+            {% form 'contact' %}
+              {% if form.posted_successfully? %}
+                <div class="golden-success">
+                  <p>Thank you for contacting us! We'll get back to you soon.</p>
+                </div>
+              {% endif %}
+
+              {% if form.errors %}
+                <div class="golden-error">
+                  <p>Please correct the errors below:</p>
+                  <ul>
+                    {% for field in form.errors %}
+                      <li>{{ field | capitalize }} {{ form.errors[field] }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+
+              <div class="space-y-6">
+                <div class="golden-form-group">
+                  <label for="ContactFormName" class="golden-form-label">Name *</label>
+                  <input 
+                    type="text" 
+                    id="ContactFormName" 
+                    name="contact[name]" 
+                    placeholder="Your full name"
+                    value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                    class="golden-input"
+                    required>
+                </div>
+
+                <div class="golden-form-group">
+                  <label for="ContactFormEmail" class="golden-form-label">Email *</label>
+                  <input 
+                    type="email" 
+                    id="ContactFormEmail" 
+                    name="contact[email]" 
+                    placeholder="your@email.com"
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                    class="golden-input"
+                    required>
+                </div>
+
+                <div class="golden-form-group">
+                  <label for="ContactFormPhone" class="golden-form-label">Phone</label>
+                  <input 
+                    type="tel" 
+                    id="ContactFormPhone" 
+                    name="contact[phone]" 
+                    placeholder="(000) 000-0000"
+                    value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                    class="golden-input">
+                </div>
+
+                <div class="golden-form-group">
+                  <label for="ContactFormSubject" class="golden-form-label">Subject *</label>
+                  <select id="ContactFormSubject" name="contact[subject]" class="golden-input" required>
+                    <option value="">Select a subject</option>
+                    <option value="Product inquiries">Product inquiries</option>
+                    <option value="Order issues">Order issues</option>
+                    <option value="Returns and exchanges">Returns and exchanges</option>
+                    <option value="Suggestions">Suggestions</option>
+                    <option value="Partnerships">Partnerships</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div class="golden-form-group">
+                  <label for="ContactFormMessage" class="golden-form-label">Message *</label>
+                  <textarea 
+                    id="ContactFormMessage" 
+                    name="contact[body]" 
+                    placeholder="Describe your question or comment..."
+                    rows="6"
+                    class="golden-input"
+                    required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
+                </div>
+
+                <div class="golden-form-group">
+                  <button type="submit" class="golden-form-submit">
+                    Send Message
+                  </button>
+                </div>
+              </div>
+            {% endform %}
+          </div>
+
+          <!-- Additional Contact Info -->
+          <div class="golden-card golden-fade-in">
+            <h2 class="golden-heading text-2xl mb-8">Other ways to contact us</h2>
+            
+            <div class="space-y-6">
+              {% if settings.contact_phone != blank %}
+                <div class="golden-card-hover p-4">
+                  <div class="flex items-center space-x-4">
+                    <div class="text-2xl">📞</div>
+                    <div>
+                      <h3 class="golden-text-primary font-bold">Phone</h3>
+                      <p class="golden-text-secondary">{{ settings.contact_phone }}</p>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if settings.contact_whatsapp != blank %}
+                <div class="golden-card-hover p-4">
+                  <div class="flex items-center space-x-4">
+                    <div class="text-2xl">💬</div>
+                    <div>
+                      <h3 class="golden-text-primary font-bold">WhatsApp</h3>
+                      <a href="https://wa.me/{{ settings.contact_whatsapp | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}" target="_blank" class="golden-link">
+                        {{ settings.contact_whatsapp }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              <div class="golden-card-hover p-4">
+                <div class="flex items-center space-x-4">
+                  <div class="text-2xl">📧</div>
+                  <div>
+                    <h3 class="golden-text-primary font-bold">Email</h3>
+                    <a href="mailto:contact@store.com" class="golden-link">
+                      contact@store.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {% if settings.contact_address != blank %}
+                <div class="golden-card-hover p-4">
+                  <div class="flex items-center space-x-4">
+                    <div class="text-2xl">📍</div>
+                    <div>
+                      <h3 class="golden-text-primary font-bold">Address</h3>
+                      <p class="golden-text-secondary">{{ settings.contact_address }}</p>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- FAQ Links -->
+              <div class="mt-8 p-6 golden-frosted rounded-xl">
+              <h3 class="golden-heading text-lg mb-6">Frequently Asked Questions</h3>
+                <div class="space-y-3">
+                <div class="faq-item">
+                  <button class="faq-question golden-link-button block w-full text-left flex items-center justify-between" data-faq="order">
+                    <span>How to place an order?</span>
+                    <svg class="faq-arrow w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+                  <div class="faq-answer mt-3 p-4 bg-golden-50 rounded-lg border-l-4 border-golden-400 hidden">
+                    <p class="text-sm golden-text-secondary">
+                      To place an order, browse our products, add desired items to your cart and complete your purchase. 
+                      You can pay with credit card, bank transfer or other available payment methods. After payment confirmation, 
+                      your order will be processed and shipped.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="faq-item">
+                  <button class="faq-question golden-link-button block w-full text-left flex items-center justify-between" data-faq="shipping">
+                    <span>Shipping policies</span>
+                    <svg class="faq-arrow w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+                  <div class="faq-answer mt-3 p-4 bg-golden-50 rounded-lg border-l-4 border-golden-400 hidden">
+                    <p class="text-sm golden-text-secondary">
+                      We deliver worldwide through postal services and partner carriers. 
+                      Delivery time varies from 5 to 15 business days, depending on your location. 
+                      Free shipping for orders over $199.00.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="faq-item">
+                  <button class="faq-question golden-link-button block w-full text-left flex items-center justify-between" data-faq="returns">
+                    <span>Returns and exchanges</span>
+                    <svg class="faq-arrow w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+                  <div class="faq-answer mt-3 p-4 bg-golden-50 rounded-lg border-l-4 border-golden-400 hidden">
+                    <p class="text-sm golden-text-secondary">
+                      You have up to 30 days to request an exchange or return after receiving the product. 
+                      Items must be in perfect condition, unused and with original packaging. 
+                      Contact us to start the process.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="faq-item">
+                  <button class="faq-question golden-link-button block w-full text-left flex items-center justify-between" data-faq="privacy">
+                    <span>Privacy policy</span>
+                    <svg class="faq-arrow w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+                  <div class="faq-answer mt-3 p-4 bg-golden-50 rounded-lg border-l-4 border-golden-400 hidden">
+                    <p class="text-sm golden-text-secondary">
+                      Your personal data is protected and used only to process orders and improve your experience. 
+                      We don't share information with third parties without your consent. 
+                      We use SSL to ensure the security of your information.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', function() {
+      const faqItem = this.closest('.faq-item');
+      const answer = faqItem.querySelector('.faq-answer');
+      const arrow = this.querySelector('.faq-arrow');
+      
+      // Toggle current FAQ
+      const isOpen = !answer.classList.contains('hidden');
+      
+      // Close all other FAQs
+      faqQuestions.forEach(otherQuestion => {
+        if (otherQuestion !== question) {
+          const otherFaqItem = otherQuestion.closest('.faq-item');
+          const otherAnswer = otherFaqItem.querySelector('.faq-answer');
+          const otherArrow = otherQuestion.querySelector('.faq-arrow');
+          
+          otherAnswer.classList.add('hidden');
+          otherArrow.style.transform = 'rotate(0deg)';
+        }
+      });
+      
+      // Toggle current FAQ
+      if (isOpen) {
+        answer.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      } else {
+        answer.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+});
+</script>
+
+<style>
+.faq-item {
+  border-bottom: 1px solid rgba(218, 165, 32, 0.2);
+  padding-bottom: 0.75rem;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.faq-question {
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.faq-question:hover {
+  background-color: rgba(218, 165, 32, 0.1);
+  transform: translateX(4px);
+}
+
+.faq-answer {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.faq-arrow {
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+/* Mobile responsiveness for FAQ */
+@media (max-width: 768px) {
+  .faq-question {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .faq-answer {
+    padding: 0.75rem;
+  }
+  
+  .faq-answer p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}
+</style>

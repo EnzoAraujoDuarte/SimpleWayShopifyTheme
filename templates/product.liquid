@@ -1,0 +1,102 @@
+<div class="container py-10">
+
+  {% render 'breadcrumbs' %}
+ 
+  <product-form data-handle="{{ product.handle }}">
+
+    {% form 'product', product, class: 'grid grid-cols-1 md:grid-cols-2 gap-10' %}
+
+      {% comment %} Product Media {% endcomment %}
+      <div class="product-media">
+        
+        {% if product.featured_media %}
+          <img
+            src="{{ product.featured_media | img_url: '800x' }}"
+            alt="{{ product.featured_media.alt | escape }}"
+            class="w-full h-auto"
+            loading="lazy"
+            width="{{ product.featured_media.width }}"
+            height="{{ product.featured_media.height }}">
+        {% endif %}
+
+        {% if product.media.size > 1 %}
+          <div class="product-gallery grid grid-cols-4 gap-4 mt-4">
+            {% for media in product.media %}
+              <button class="gallery-item" data-media-id="{{ media.id }}">
+                <img
+                  src="{{ media | img_url: '150x' }}"
+                  alt="{{ media.alt | escape }}"
+                  class="w-full h-auto"
+                  loading="lazy"
+                  width="{{ media.width }}"
+                  height="{{ media.height }}">
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% comment %} Product Details {% endcomment %}
+      <div class="product-details">
+
+        <h1 class="text-3xl font-bold mb-2">{{ product.title }}</h1>
+        
+        {% if product.vendor %}
+          <div class="text-gray-600 mb-4">{{ product.vendor }}</div>
+        {% endif %}
+
+        <div class="mb-1" data-sku>
+          SKU: {{ product.selected_or_first_available_variant.sku }}
+        </div>
+
+        <div class="text-xl font-semibold mb-6" data-price>
+          {{ product.price | money }}
+        </div>
+
+        {% comment %} Variant selector {% endcomment %}
+        <variant-selector data-handle="{{ product.handle }}"></variant-selector>
+
+        {% comment %} Variant picker {% endcomment %}
+        <variant-picker data-handle="{{ product.handle }}"></variant-picker>
+
+        {% comment %} TODO: Use a web component to handle quantity {% endcomment %}
+        <div class="flex flex-col gap-2 my-4">
+          <label for="quantity">Quantity</label>
+          <input type="number" name="quantity" value="1">
+        </div>
+
+        {% comment %} TODO: Use an app to handle custom properties {% endcomment %}
+        <div class="flex flex-col gap-2 my-4">
+          <label for="properties[Custom Name]">Custom Name</label>
+          <input type="text" name="properties[Custom Name]" value="">
+        </div>
+
+        <input type="hidden" name="properties[_location]" value="brazil">
+
+        <div class="flex gap-5">
+
+          {% comment %} <quantity-selector value="1" name="quantity" remove-button="false" min="1"></quantity-selector> {% endcomment %}
+
+          {% comment %} Add to cart button {% endcomment %}
+          <addtocart-button data-handle="{{ product.handle }}" class="w-full">
+
+            <button
+              type="submit"
+              class="btn w-full bg-[#825C63] text-white hover:bg-[#825C63]/80"
+              name="add">
+              Add to Cart
+            </button>
+
+          </addtocart-button>
+        
+        </div>
+        
+      </div>
+
+    {% endform %}
+
+  </product-form>
+
+  {% section 'related-products' %}
+
+</div>

@@ -1,0 +1,44 @@
+<div class="container px-4 py-5">
+
+	<div class="hidden laptop:block laptop:mb-5">
+		{% render 'breadcrumbs' %}
+	</div>
+
+	<div class="pb-5 flex flex-col gap-2">
+
+    <h1 class="text-2xl uppercase laptop:text-3xl">Search results for "{{ search.terms }}"</h1>
+
+  </div>
+
+	<div class="flex flex-col gap-8">
+
+    {%- if search.results.size > 0 -%}
+
+      {% assign count = null %}
+
+      {%- if search.results_count -%}
+        {% assign count = search.results_count %}
+      {%- elsif search.products_count == search.all_products_count -%}
+        {% assign count = search.products_count %}
+      {%- else -%}
+        {% assign count = search.all_products_count %}
+      {%- endif -%}
+
+      {% render 'filters', count: count, search_page: true %}
+
+      <div id="product_grid">
+        {%- paginate search.results by 24 -%}
+          {% render 'product-grid', products: search.results %}
+          {% render 'pagination', paginate: paginate %}
+        {%- endpaginate -%}
+      </div>
+
+    {%- else -%}
+
+      <p>No results found for "{{ search.terms }}"</p>
+
+    {%- endif -%}
+
+	</div>
+
+</div>

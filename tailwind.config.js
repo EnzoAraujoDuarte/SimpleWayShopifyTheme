@@ -1,0 +1,168 @@
+module.exports = {
+	content: ["./**/*.liquid", "./assets/*.js", "./src/*.js"],
+	theme: {
+		extend: {
+			container: {
+				center: true,
+				screens: {
+					wide: "1368px",
+				},
+			},
+			fontFamily: {
+				primary: ["Jost", "Helvetica", "Arial", "sans-serif"],
+				secondary: ["Jost", "Helvetica", "Arial", "sans-serif"],
+				heading: ["Jost", "Helvetica", "Arial", "sans-serif"],
+				body: ["Jost", "Helvetica", "Arial", "sans-serif"],
+			},
+			colors: {
+				// Golden Theme Colors
+				golden: {
+					50: "#FFFEF7",
+					100: "#FFFACD",
+					200: "#FFF8DC",
+					300: "#FFD700",
+					400: "#FFA500",
+					500: "#FF8C00",
+					600: "#FF7F00",
+					700: "#FF6347",
+					800: "#CD853F",
+					900: "#8B4513",
+				},
+				primary: {
+					50: "#FFFEF7",
+					100: "#FFFACD",
+					200: "#FFF8DC",
+					300: "#FFD700",
+					400: "#FFA500",
+					500: "#FF8C00",
+					600: "#FF7F00",
+					700: "#FF6347",
+					800: "#CD853F",
+					900: "#8B4513",
+				},
+				onPrimary: {
+					50: "#8B4513",
+					100: "#8B4513",
+					200: "#8B4513",
+					300: "#ffffff",
+					400: "#ffffff",
+					500: "#ffffff",
+					600: "#ffffff",
+					700: "#ffffff",
+					800: "#ffffff",
+					900: "#ffffff",
+				},
+				secondary: {
+					50: "#FFF8DC",
+					100: "#F0E68C",
+					200: "#DDA0DD",
+					300: "#DA70D6",
+					400: "#BA55D3",
+					500: "#9370DB",
+					600: "#8A2BE2",
+					700: "#7B68EE",
+					800: "#6A5ACD",
+					900: "#483D8B",
+				},
+				onSecondary: {
+					50: "#8B4513",
+					100: "#8B4513",
+					200: "#8B4513",
+					300: "#8B4513",
+					400: "#ffffff",
+					500: "#ffffff",
+					600: "#ffffff",
+					700: "#ffffff",
+					800: "#ffffff",
+					900: "#ffffff",
+				},
+				tertiary: {
+					400: "#FBF9F6",
+					500: "#FBF9F6",
+					600: "#FBF9F6",
+				},
+				onTertiary: {
+					400: "#231F20",
+					500: "#231F20",
+					600: "#231F20",
+				},
+				accent: {
+					400: "#231F20",
+					500: "#231F20",
+					600: "#231F20",
+				},
+				onAccent: {
+					400: "#FFFFFF",
+					500: "#FFFFFF",
+					600: "#FFFFFF",
+				},
+				alert: {
+					success: "#16A24A",
+					error: "#DC2626",
+					warning: "#E9580C",
+				},
+				onAlert: {
+					success: "#dcfbe8",
+					error: "#ffe0e0",
+					warning: "#fff0e9",
+				},
+				base: {
+					background: "#FFFEF7",
+					surface: "#FFFFFF",
+					border: "#FFD700",
+				},
+				onBase: {
+					background: "#8B4513",
+					surface: "#8B4513",
+				},
+				neutral: {
+					dark: "#231F20",
+					light: "#FFFFFF",
+				},
+				onNeutral: {
+					dark: "#FFFFFF",
+					light: "#231F20",
+				},
+			},
+			screens: {
+				largemobile: "640px",
+				tablet: "768px",
+				laptop: "1024px",
+				desktop: "1280px",
+				wide: "1536px",
+			},
+			backgroundImage: {
+				'golden-gradient': 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%)',
+				'golden-gradient-light': 'linear-gradient(135deg, #FFFEF7 0%, #FFFACD 50%, #F0E68C 100%)',
+				'golden-gradient-soft': 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 248, 220, 0.95) 100%)',
+				'golden-radial': 'radial-gradient(circle at center, #FFD700 0%, #FFA500 50%, #FF8C00 100%)',
+			},
+			boxShadow: {
+				'golden': '0 4px 15px rgba(255, 165, 0, 0.3)',
+				'golden-lg': '0 10px 30px rgba(255, 165, 0, 0.4)',
+				'golden-xl': '0 20px 40px rgba(255, 165, 0, 0.5)',
+				'golden-glow': '0 0 20px rgba(255, 215, 0, 0.6)',
+			},
+			animation: {
+				'fade-in-up': 'fadeInUp 0.6s ease-out',
+				'shimmer': 'shimmer 2s infinite',
+				'glow': 'glow 2s ease-in-out infinite alternate',
+			},
+			keyframes: {
+				fadeInUp: {
+					'0%': { opacity: '0', transform: 'translateY(30px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' },
+				},
+				shimmer: {
+					'0%': { transform: 'translateX(-100%)' },
+					'100%': { transform: 'translateX(100%)' },
+				},
+				glow: {
+					'0%': { boxShadow: '0 0 5px rgba(255, 215, 0, 0.5)' },
+					'100%': { boxShadow: '0 0 20px rgba(255, 215, 0, 0.8)' },
+				},
+			},
+		},
+	},
+	plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
+};

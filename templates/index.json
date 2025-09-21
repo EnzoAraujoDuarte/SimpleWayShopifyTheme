@@ -1,0 +1,765 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_banner_JnRU9W": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_ajAePh": {
+          "type": "slide",
+          "settings": {
+            "desktop_image": "shopify://shop_images/9q2nssxx.png",
+            "alt_text": "",
+            "link_type": "collection",
+            "collection": "farm-collab",
+            "product": "",
+            "custom_url": "",
+            "open_new_tab": false
+          }
+        },
+        "slide_kjErXg": {
+          "type": "slide",
+          "settings": {
+            "desktop_image": "shopify://shop_images/em4fu7qq.png",
+            "alt_text": "",
+            "link_type": "collection",
+            "collection": "taza-bars",
+            "product": "",
+            "custom_url": "",
+            "open_new_tab": false
+          }
+        },
+        "slide_Ypp697": {
+          "type": "slide",
+          "settings": {
+            "desktop_image": "shopify://shop_images/vtev7yjs.png",
+            "alt_text": "",
+            "link_type": "collection",
+            "collection": "simple-organic",
+            "product": "",
+            "custom_url": "",
+            "open_new_tab": false
+          }
+        },
+        "slide_TJGHNe": {
+          "type": "slide",
+          "settings": {
+            "desktop_image": "shopify://shop_images/xvc855kq.png",
+            "alt_text": "",
+            "link_type": "collection",
+            "collection": "verve-coffee",
+            "product": "",
+            "custom_url": "",
+            "open_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "slide_ajAePh",
+        "slide_kjErXg",
+        "slide_Ypp697",
+        "slide_TJGHNe"
+      ],
+      "name": "Hero Banner",
+      "settings": {
+        "autoplay_interval": 5000,
+        "text_alignment": "center"
+      }
+    },
+    "brands_carousel_QgzUiN": {
+      "type": "brands-carousel",
+      "blocks": {
+        "brand_9FbUkT": {
+          "type": "brand",
+          "settings": {
+            "collection": "bold",
+            "brand_image": "shopify://shop_images/bold.png",
+            "show_brand_name": false
+          }
+        },
+        "popup_image_NanxiU": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_9FbUkT",
+            "image": "shopify://shop_images/401faylp.png",
+            "title": "MIXED BOXES",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "bold",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-left",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "popup_image_gmb9fj": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_9FbUkT",
+            "image": "shopify://shop_images/Boldsnackstopsales_1ae9e4ee-ec03-44ef-8654-c5436f649713.png",
+            "title": "BEST SELLERS",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "bold",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-right",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "popup_image_xFH73L": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_9FbUkT",
+            "image": "shopify://shop_images/b07p2ics.png",
+            "title": "WHEY",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "bold",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-right",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "brand_aMcmye": {
+          "type": "brand",
+          "settings": {
+            "collection": "verve-coffee",
+            "brand_image": "shopify://shop_images/15323171.54b0e160c6987_53562771-bcfe-4735-ab4d-c6e04024ee2e.jpg",
+            "show_brand_name": false
+          }
+        },
+        "popup_image_BJ7Fni": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_aMcmye",
+            "image": "shopify://shop_images/41tmm84i.png",
+            "title": "BEST SELLERS",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "verve-coffee",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-left",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "brand_dfcUAp": {
+          "type": "brand",
+          "settings": {
+            "collection": "cau-chocolates",
+            "brand_image": "shopify://shop_images/CauChocolates.jpg",
+            "show_brand_name": false
+          }
+        },
+        "popup_image_8fVHMC": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_dfcUAp",
+            "image": "shopify://shop_images/hpwjv6a9.png",
+            "title": "FAVORITES",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "cau-favorites",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-left",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "popup_image_WNJH9c": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_dfcUAp",
+            "image": "shopify://shop_images/m5fj8kqi.png",
+            "title": "CAU FRUITS",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "cau-fruits",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-right",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "brand_zati69": {
+          "type": "brand",
+          "settings": {
+            "collection": "sallve",
+            "brand_image": "shopify://shop_images/Sallve.gif",
+            "show_brand_name": false
+          }
+        },
+        "popup_image_T74fHn": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_zati69",
+            "image": "shopify://shop_images/lhlqous5.png",
+            "title": "SUN PROTECTION",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "sallve",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-left",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "popup_image_z7hURe": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_zati69",
+            "image": "shopify://shop_images/fk6klnkp.png",
+            "title": "SKIN CLEANSING",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "sallve",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-right",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "popup_image_FVLeb7": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_zati69",
+            "image": "shopify://shop_images/w4bgwfrr.png",
+            "title": "HYDRATION",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "sallve",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-left",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "brand_Fy3zf9": {
+          "type": "brand",
+          "settings": {
+            "collection": "cocolab",
+            "brand_image": "shopify://shop_images/mark.jpg",
+            "show_brand_name": false
+          }
+        },
+        "popup_image_afPbHA": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_Fy3zf9",
+            "image": "shopify://shop_images/td173ner.png",
+            "title": "EVERYTHING FOR ORAL HYGIENE",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "cocolab",
+            "product": "",
+            "custom_url": "",
+            "text_position": "center",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "brand_Jwhz47": {
+          "type": "brand",
+          "settings": {
+            "collection": "taza-chocolates",
+            "brand_image": "shopify://shop_images/Main_Logo_af7f04a5-2c73-4a89-8fd8-a53750c599d9.png",
+            "show_brand_name": false
+          }
+        },
+        "popup_image_Fqix4D": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_Jwhz47",
+            "image": "shopify://shop_images/yrx41wfy.png",
+            "title": "BARS",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "taza-bars",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-left",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "popup_image_FjUmUq": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_Jwhz47",
+            "image": "shopify://shop_images/gvhk73jx.png",
+            "title": "BULK & BAKING",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "taza-bulk-baking",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-right",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "popup_image_zNMPXM": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_Jwhz47",
+            "image": "shopify://shop_images/smazjijn.png",
+            "title": "SNACKS",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "taza-snacks",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-left",
+            "text_color": "#000000",
+            "show_overlay": false
+          }
+        },
+        "brand_XQFcjy": {
+          "type": "brand",
+          "settings": {
+            "collection": "simple-organic",
+            "brand_image": "shopify://shop_images/SimpleOrganic.jpg",
+            "show_brand_name": false
+          }
+        },
+        "popup_image_GUrrcr": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_XQFcjy",
+            "image": "shopify://shop_images/izbhgkxo.png",
+            "title": "KITS",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "simple-organic-kits",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-left",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "popup_image_efTzgd": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_XQFcjy",
+            "image": "shopify://shop_images/rwtecrof.png",
+            "title": "BEST SELLERS",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "simple-organic-best-sellers",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-right",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "brand_TJNRzr": {
+          "type": "brand",
+          "settings": {
+            "collection": "havaianas",
+            "brand_image": "shopify://shop_images/havaianas_66cbb7b0-90d5-4b1c-8b2b-0816730e7362.png",
+            "show_brand_name": false
+          }
+        },
+        "popup_image_XzWK3M": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_TJNRzr",
+            "image": "shopify://shop_images/yslx6rkl_3c20e576-4815-466a-9b31-00d8405e940c.png",
+            "title": "WOMEN",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "havaianas-women",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-left",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "popup_image_CcCchW": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_TJNRzr",
+            "image": "shopify://shop_images/f1hkjcbq_19fd2404-0f69-4a15-bcd8-7f5eda81fbaf.png",
+            "title": "MEN",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "havaianas-men",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-right",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "popup_image_RfmiUa": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_TJNRzr",
+            "image": "shopify://shop_images/j1c4m20u_07f29094-621f-4090-ba55-0eb737410388.png",
+            "title": "FARM",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "farm-collab",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-left",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "popup_image_MhHVjV": {
+          "type": "popup_image",
+          "settings": {
+            "brand_reference": "brand_TJNRzr",
+            "image": "shopify://shop_images/u75xake5.png",
+            "title": "BREITLING",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "breitling-x-havaianas",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-right",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        }
+      },
+      "block_order": [
+        "brand_9FbUkT",
+        "popup_image_NanxiU",
+        "popup_image_gmb9fj",
+        "popup_image_xFH73L",
+        "brand_aMcmye",
+        "popup_image_BJ7Fni",
+        "brand_dfcUAp",
+        "popup_image_8fVHMC",
+        "popup_image_WNJH9c",
+        "brand_zati69",
+        "popup_image_T74fHn",
+        "popup_image_z7hURe",
+        "popup_image_FVLeb7",
+        "brand_Fy3zf9",
+        "popup_image_afPbHA",
+        "brand_Jwhz47",
+        "popup_image_Fqix4D",
+        "popup_image_FjUmUq",
+        "popup_image_zNMPXM",
+        "brand_XQFcjy",
+        "popup_image_GUrrcr",
+        "popup_image_efTzgd",
+        "brand_TJNRzr",
+        "popup_image_XzWK3M",
+        "popup_image_CcCchW",
+        "popup_image_RfmiUa",
+        "popup_image_MhHVjV"
+      ],
+      "custom_css": [
+        "h2 {font-family: \"Arial\", sans-serif; font-size: 20 px; font-weight: bold; background: linear-gradient(45deg, #f59e0b, #d97706, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-align: center; margin-bottom: 30px; letter-spacing: -1px;}",
+        "@media (max-width: 768px) {h2 {font-size: 36px; }}",
+        "@media (max-width: 480px) {h2 {font-size: 28px; }}"
+      ],
+      "name": "Brands Carousel",
+      "settings": {
+        "section_title": "Our partner brands",
+        "enable_popup": true,
+        "show_navigation": true,
+        "autoplay": false,
+        "autoplay_delay": 4000
+      }
+    },
+    "image_grid_NCUcGm": {
+      "type": "image-grid",
+      "blocks": {
+        "image_item_eDax9j": {
+          "type": "image_item",
+          "settings": {
+            "image": "shopify://shop_images/xkfdo8ra.png",
+            "title": "BOLD FULL LINE",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-left",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "image_item_DwFh6d": {
+          "type": "image_item",
+          "settings": {
+            "image": "shopify://shop_images/ag1g7q68.png",
+            "title": "ALL HAVAIANAS",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "havaianas",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-left",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "image_item_dQ4yAt": {
+          "type": "image_item",
+          "settings": {
+            "image": "shopify://shop_images/o53u5l9p.png",
+            "title": "VERVE COFFEE",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "verve-coffee",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-right",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "image_item_wNdpAW": {
+          "type": "image_item",
+          "settings": {
+            "image": "shopify://shop_images/y75xa3iv_1.png",
+            "title": "CAU CHOCOLATES",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-right",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "image_item_yb4Fhe": {
+          "type": "image_item",
+          "settings": {
+            "image": "shopify://shop_images/dupla-rotina-pratica-sallve-bastao-antioleosidade-protetor-solar-fps60.png",
+            "title": "SALLVE",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "sallve",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-left",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "image_item_UGL7aB": {
+          "type": "image_item",
+          "settings": {
+            "image": "shopify://shop_images/24sx77vx.png",
+            "title": "COCOLAB PRODUCTS",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "cocolab",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-left",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        },
+        "image_item_edLbU6": {
+          "type": "image_item",
+          "settings": {
+            "image": "shopify://shop_images/u61sh1ed.png",
+            "title": "TAZA EVERYTHING",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "taza-chocolates",
+            "product": "",
+            "custom_url": "",
+            "text_position": "top-right",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "image_item_AWJaq8": {
+          "type": "image_item",
+          "settings": {
+            "image": "shopify://shop_images/10jwzep3.png",
+            "title": "SIMPLE ORGANIC",
+            "subtitle": "",
+            "link_type": "collection",
+            "collection": "simple-organic",
+            "product": "",
+            "custom_url": "",
+            "text_position": "bottom-right",
+            "text_color": "#fdea00",
+            "show_overlay": false
+          }
+        }
+      },
+      "block_order": [
+        "image_item_eDax9j",
+        "image_item_DwFh6d",
+        "image_item_dQ4yAt",
+        "image_item_wNdpAW",
+        "image_item_yb4Fhe",
+        "image_item_UGL7aB",
+        "image_item_edLbU6",
+        "image_item_AWJaq8"
+      ],
+      "name": "Image Grid",
+      "settings": {
+        "section_title": "",
+        "section_subtitle": "",
+        "grid_gap": 12,
+        "border_radius": 16,
+        "show_navigation": true,
+        "show_pagination": true,
+        "autoplay": false,
+        "autoplay_delay": 4000
+      }
+    },
+    "top10_bydqqE": {
+      "type": "top10",
+      "custom_css": [
+        "H2 {color: black;}"
+      ],
+      "name": "TOP10",
+      "settings": {
+        "section_title": "Top 10 best sellers of the month",
+        "content_type": "collection",
+        "collection": "top-products",
+        "show_navigation": true,
+        "autoplay": false,
+        "autoplay_delay": 4000
+      }
+    },
+    "image_grid_R9f7hM": {
+      "type": "image-grid",
+      "blocks": {
+        "image_item_JWBLtq": {
+          "type": "image_item",
+          "settings": {
+            "image": "shopify://shop_images/logistic_75687978-c169-4ad4-add6-09c6b2123fb9.jpg",
+            "title": "",
+            "subtitle": "",
+            "link_type": "url",
+            "collection": "",
+            "product": "",
+            "custom_url": "https://enzo-araujo-duarte.myshopify.com/pages/about",
+            "text_position": "center",
+            "text_color": "#ffffff",
+            "show_overlay": false
+          }
+        },
+        "text_item_tnCaGU": {
+          "type": "text_item",
+          "settings": {
+            "title": "",
+            "content": "We are a wholesale and retail company specializing in Beauty, Oral Care, Footwear, and Food products. We pride ourselves on reliable delivery, competitive pricing, and exceptional customer service. Our mission is to provide seamless business solutions while building lasting partnerships with clients worldwide.",
+            "link_type": "none",
+            "collection": "",
+            "product": "",
+            "custom_url": "",
+            "background_color": "#ffffff",
+            "text_color": "#000000",
+            "text_alignment": "center",
+            "font_size": 16
+          }
+        }
+      },
+      "block_order": [
+        "image_item_JWBLtq",
+        "text_item_tnCaGU"
+      ],
+      "custom_css": [
+        "h2 {font-family: \"Arial\", sans-serif; font-size: 20 px; font-weight: bold; background: linear-gradient(45deg, #f59e0b, #d97706, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-align: center; margin-bottom: 30px; letter-spacing: -1px;}",
+        "@media (max-width: 768px) {h2 {font-size: 36px; }}",
+        "@media (max-width: 480px) {h2 {font-size: 28px; }}"
+      ],
+      "name": "Image Grid",
+      "settings": {
+        "section_title": "What is the Simple Way?",
+        "section_subtitle": "",
+        "grid_gap": 8,
+        "border_radius": 16,
+        "show_navigation": false,
+        "show_pagination": false,
+        "autoplay": false,
+        "autoplay_delay": 4000
+      }
+    },
+    "custom_section_9HDypz": {
+      "type": "custom-section",
+      "blocks": {
+        "product_slider_YLPPjK": {
+          "type": "product-slider",
+          "name": "Product Slider",
+          "settings": {
+            "title": "Featured Products",
+            "collection": "top-products",
+            "products_to_show": 12
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "product_slider_YLPPjK"
+      ],
+      "custom_css": [
+        "h2 {font-family: \"Arial\", sans-serif; font-size: 20 px; font-weight: bold; background: linear-gradient(45deg, #f59e0b, #d97706, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-align: center; margin-bottom: 30px; letter-spacing: -1px;}",
+        "@media (max-width: 768px) {h2 {font-size: 36px; }}",
+        "@media (max-width: 480px) {h2 {font-size: 28px; }}"
+      ],
+      "name": "Custom Section",
+      "settings": {
+        "advanced_settings": true,
+        "position": "!ml-auto !mr-auto",
+        "mobile_container": false,
+        "padding_top": "pt-0",
+        "padding_bottom": "pb-0",
+        "padding_left": "pl-0",
+        "padding_right": "pr-0",
+        "max_width": "",
+        "background_color": "",
+        "tablet_container": false,
+        "padding_top_tablet": "",
+        "padding_bottom_tablet": "",
+        "padding_left_tablet": "",
+        "padding_right_tablet": "",
+        "max_width_tablet": "",
+        "background_color_tablet": "",
+        "desktop_container": false,
+        "padding_top_desktop": "",
+        "padding_bottom_desktop": "",
+        "padding_left_desktop": "",
+        "padding_right_desktop": "",
+        "max_width_desktop": "",
+        "background_color_desktop": ""
+      }
+    }
+  },
+  "order": [
+    "hero_banner_JnRU9W",
+    "brands_carousel_QgzUiN",
+    "image_grid_NCUcGm",
+    "top10_bydqqE",
+    "image_grid_R9f7hM",
+    "custom_section_9HDypz"
+  ]
+}

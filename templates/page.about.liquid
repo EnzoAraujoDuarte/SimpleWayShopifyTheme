@@ -1,0 +1,381 @@
+{% comment %}
+  Template: page.about.liquid
+  About Us page template
+{% endcomment %}
+
+<div class="about-page">
+  
+  {% comment %} Hero Section {% endcomment %}
+  <section class="golden-section bg-gradient-to-br from-golden-50 via-white to-golden-100 pb-8">
+    <div class="golden-container">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="golden-heading text-3xl laptop:text-4xl desktop:text-5xl mb-3">
+          About Simple Way
+        </h1>
+        <p class="text-lg laptop:text-xl text-golden-800 leading-relaxed">
+          Connecting Quality to Your Life
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} Main Content {% endcomment %}
+  <section class="golden-section pt-8">
+    <div class="golden-container">
+      <div class="grid laptop:grid-cols-2 gap-12 laptop:gap-16 items-start">
+        
+        {% comment %} Content Column {% endcomment %}
+        <div class="space-y-8">
+          
+          {% comment %} Introduction {% endcomment %}
+          <div class="golden-card h-full">
+            <h2 class="text-2xl laptop:text-3xl font-bold text-golden-900 mb-6">
+              Our Story
+            </h2>
+            <div class="space-y-4 text-golden-800 leading-relaxed text-justify">
+              <p>
+                Located in the heart of <strong>Colatina, Espírito Santo</strong>, at Rua das Palmeiras, 847, we are more than just a wholesale and retail company – we are <em>curators of excellence</em>, bringing together the finest products that enhance your daily life.
+              </p>
+              <p>
+                Since our establishment, we have built strong partnerships with renowned brands that share our commitment to quality and innovation. Our carefully selected portfolio spans four essential categories: <strong>Beauty, Oral Care, Footwear, and Food</strong> – because we believe that true wellness encompasses every aspect of your lifestyle.
+              </p>
+            </div>
+          </div>
+
+          {% comment %} Mission & Values {% endcomment %}
+          <div class="golden-card h-full">
+            <h2 class="text-2xl laptop:text-3xl font-bold text-golden-900 mb-6">
+              Our Commitment
+            </h2>
+            <div class="space-y-4 text-golden-800 leading-relaxed text-justify">
+              <p>
+                We are committed to maintaining the highest standards of excellence in everything we do. Our focus is on building strong, lasting relationships with our clients while ensuring exceptional service and product quality.
+              </p>
+              <p>
+                Our strategic location in Colatina allows us to serve clients across Espírito Santo and beyond, offering personalized service that transforms business relationships into lasting partnerships. We don't just distribute products; we deliver experiences that enrich lives and businesses alike.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        {% comment %} Visual Column {% endcomment %}
+        <div class="space-y-8">
+          
+          {% comment %} Location Card {% endcomment %}
+          <div class="golden-card text-center h-auto">
+            <div class="golden-icon-bg w-16 h-16 mx-auto mb-4">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-golden-900 mb-2">Our Location</h3>
+            <p class="text-golden-800 leading-relaxed">
+              Rua das Palmeiras, 847<br>
+              Colatina, Espírito Santo<br>
+              Brazil
+            </p>
+          </div>
+
+          {% comment %} Categories Card {% endcomment %}
+          <div class="golden-card h-auto">
+            <h3 class="text-xl laptop:text-2xl font-semibold text-golden-900 mb-6 text-center">
+              Our Categories
+            </h3>
+            <div class="grid grid-cols-2 gap-4 laptop:gap-6">
+              
+              {% comment %} Beauty Category {% endcomment %}
+              <a href="{{ collections.beauty.url | default: '/collections/beauty' }}" class="category-card group">
+                <span class="category-label">Beauty</span>
+              </a>
+
+              {% comment %} Oral Care Category {% endcomment %}
+              <a href="{{ collections.oral-care.url | default: '/collections/oral-care' }}" class="category-card group">
+                <span class="category-label">Oral Care</span>
+              </a>
+
+              {% comment %} Footwear Category {% endcomment %}
+              <a href="{{ collections.footwear.url | default: '/collections/footwear' }}" class="category-card group">
+                <span class="category-label">Footwear</span>
+              </a>
+
+              {% comment %} Food Category {% endcomment %}
+              <a href="{{ collections.food.url | default: '/collections/food' }}" class="category-card group">
+                <span class="category-label">Food</span>
+              </a>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} Call to Action Section {% endcomment %}
+  <section class="golden-section">
+    <div class="golden-container">
+      <div class="golden-card text-center max-w-3xl mx-auto">
+        <h2 class="text-3xl laptop:text-4xl font-bold text-golden-900 mb-6">
+          Join Us in Celebrating Quality
+        </h2>
+        <p class="text-xl text-golden-800 mb-8 leading-relaxed">
+          Join us in celebrating quality, authenticity, and the art of living well. Discover more about our journey and commitment to excellence.
+        </p>
+        <div class="flex flex-col tablet:flex-row gap-4 justify-center">
+          <a href="https://simpleway.solutions" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="golden-button text-lg px-8 py-4 inline-flex items-center justify-center gap-2">
+            <span>Discover Our Story</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </a>
+          <a href="{{ routes.collections_url }}" 
+             class="golden-button-outline text-lg px-8 py-4 inline-flex items-center justify-center gap-2">
+            <span>Explore Products</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} Footer Note {% endcomment %}
+  <section class="py-12 bg-gradient-to-br from-golden-50 via-white to-golden-100 border-t border-golden-200">
+    <div class="golden-container">
+      <div class="max-w-lg mx-auto">
+        <div class="golden-card text-center golden-card-hover">
+          <div class="space-y-4">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-golden-gradient rounded-full mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <div class="space-y-2">
+              <p class="text-golden-600 font-medium italic">
+                This page is for learning purposes.
+              </p>
+              <p class="text-golden-700">
+                Developed by 
+                <a href="https://enzoaraujo.site" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="golden-link font-semibold hover:text-golden-600 transition-colors duration-300">
+                  Enzo Araujo Duarte
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% comment %} Custom Styles {% endcomment %}
+<style>
+  .about-page {
+    min-height: 100vh;
+  }
+  
+  .about-page .golden-heading::after {
+    margin-top: 1rem;
+  }
+  
+  .about-page .golden-card {
+    transition: all 0.3s ease;
+  }
+  
+  .about-page .golden-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .about-page .golden-button,
+  .about-page .golden-button-outline {
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .about-page .golden-button:hover,
+  .about-page .golden-button-outline:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Category Cards Styling */
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1.5rem;
+    background: linear-gradient(135deg, #fefcbf 0%, #fef3c7 50%, #fde68a 100%);
+    border-radius: 1.5rem;
+    border: 2px solid #f59e0b;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+    text-decoration: none;
+  }
+
+  .category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .category-card:hover::before {
+    opacity: 0.15;
+  }
+
+  .category-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(245, 158, 11, 0.4);
+    border-color: #d97706;
+    text-decoration: none;
+  }
+
+  .category-label {
+    position: relative;
+    z-index: 2;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #92400e;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+  }
+
+  .category-card:hover .category-label {
+    color: #78350f;
+    transform: translateY(-4px) scale(1.1);
+  }
+
+  /* Enhanced Footer Card Styling */
+  .about-page .golden-card-hover {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #fefcbf 50%, #fef3c7 100%);
+    border: 2px solid #f59e0b;
+    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .about-page .golden-card-hover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(245, 158, 11, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+  }
+
+  .about-page .golden-card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(245, 158, 11, 0.25);
+    border-color: #d97706;
+  }
+
+  .about-page .golden-card-hover:hover::before {
+    opacity: 1;
+    transform: rotate(45deg) translate(50%, 50%);
+  }
+
+  /* Responsive Design */
+  @media (min-width: 640px) {
+    .category-card {
+      padding: 3rem 2rem;
+      min-height: 140px;
+    }
+    
+    .category-label {
+      font-size: 1.375rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .category-card {
+      padding: 3.5rem 2.5rem;
+      min-height: 160px;
+    }
+    
+    .category-label {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .category-card {
+      padding: 4rem 3rem;
+      min-height: 180px;
+    }
+    
+    .category-label {
+      font-size: 1.75rem;
+    }
+  }
+
+  /* Mobile Optimization */
+  @media (max-width: 768px) {
+    .about-page .golden-heading {
+      font-size: 2rem;
+    }
+    
+    .about-page .golden-section {
+      padding: 3rem 1rem;
+    }
+    
+    .category-card {
+      padding: 2rem 1rem;
+      min-height: 100px;
+    }
+    
+    .category-label {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+{% comment %} Schema for SEO {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Simple Way",
+  "description": "Learn about Simple Way - curators of excellence bringing together the finest products in Beauty, Oral Care, Footwear, and Food from Colatina, Espírito Santo.",
+  "url": "{{ shop.url }}{{ page.url }}",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Simple Way",
+    "description": "Wholesale and retail company specializing in Beauty, Oral Care, Footwear, and Food products",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua das Palmeiras, 847",
+      "addressLocality": "Colatina",
+      "addressRegion": "Espírito Santo",
+      "addressCountry": "Brazil"
+    },
+    "url": "https://simpleway.solutions"
+  }
+}
+</script> 
