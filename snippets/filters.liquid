@@ -1,0 +1,330 @@
+
+{% if search_page %}
+  {%- assign filters = search.filters -%}
+{% else %}
+  {%- assign filters = collection.filters -%}
+{% endif %}
+
+<filters-form>
+
+  <form id="filter_form" class="flex flex-col border-t border-base-border pt-6">
+
+      <side-drawer id="filters">
+
+          {% comment %} Filters Header {% endcomment %}
+          <div class="flex pb-6 px-6 border-b border-gray-100">
+
+              <div class="inline-flex items-center gap-3">
+                  <span class="filter-icon bg-golden-100 p-2 rounded-full">
+                      {% render 'icon-adjustment' %}
+                  </span>
+                  <span class="uppercase font-semibold text-lg text-gray-800">Filters</span>
+              </div>
+              
+          </div>
+
+          {% comment %} Filters View {% endcomment %}
+          <div id="filter_view" class="flex flex-col gap-4 h-[calc(100%-90px)] bg-gray-50">
+
+              <div class="px-6 pt-4">
+                  {% render 'filters-active-facets', search_page: search_page %}
+              </div>
+
+              <div class="overflow-y-auto h-full px-6 pb-4">
+
+                  {% for filter in filters %}
+
+                      <component-accordion data-facet id="facet_{{ filter.label | escape | handleize }}" class="group w-auto border-b border-gray-200 bg-white rounded-lg mb-3 shadow-sm">
+
+                          <div class="uppercase text-sm font-medium pt-4 pb-4 px-4 flex items-center gap-2 justify-between hover:bg-gray-50 transition-colors duration-200 rounded-t-lg" data-accordion-trigger>
+                              {{ filter.label }}
+                              <span class="filter-chevron transition-transform duration-300 group-[.active]:rotate-180 text-golden-500">
+                                  {% render 'icon-chevron-down' %}
+                              </span>
+                          </div>
+
+                          <div data-accordion-container data-facet-container>
+
+                              <ul class="flex flex-col gap-4 px-4 pb-4">
+
+                                  {% case filter.type %}
+
+                                      {% when 'list' %}
+
+                                          {%- assign filterHandle = filter.label | escape | handleize -%}
+
+                                          {% if filterHandle == 'metal' %}
+
+                                              {% render 'filters-tile-facet', filter: filter, reference: filterHandle, columns: 3, image_width: 24 %}
+
+                                          {% elsif filterHandle == 'stone' %}
+
+                                              {% render 'filters-tile-facet', filter: filter, reference: filterHandle, columns: 3, image_width: 24 %}
+
+                                          {% elsif filterHandle == 'shape' %}
+
+                                              {% render 'filters-tile-facet', filter: filter, reference: 'center-stone-shape', columns: 3, image_width: 24 %}
+
+                                          {% else %}
+
+                                              {% render 'filters-list-facet', filter: filter %}
+
+                                          {% endif %}
+
+                                      {% when 'price_range' %}
+
+                                          {% render 'filters-price-facet', filter: filter %}
+
+                                  {% endcase %}
+
+                              </ul>
+                          
+                          </div>
+
+                      </component-accordion>
+
+                  {% endfor %}
+
+              </div>
+
+              <div class="flex justify-end shrink-0 px-6 pb-6">
+                  <button data-filter-submit class="btn bg-golden-500 hover:bg-golden-600 text-white font-semibold py-3 px-6 rounded-full w-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
+                      Show Results
+                  </button>
+              </div>
+
+          </div>
+
+      </side-drawer>
+
+      <div class="flex flex-col justify-between items-center largemobile:flex-row gap-4">
+
+          <div class="laptop:flex laptop:flex-wrap laptop:w-9/12 gap-2">
+
+              <button type="button" class="modern-filter-btn bg-golden-500 hover:bg-golden-600 text-white font-semibold py-3 px-6 rounded-full min-w-[200px] transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 flex items-center gap-2 justify-center" data-drawer-target="filters" aria-label="Filters">
+                  <span class="filter-icon">
+                      {% render 'icon-adjustment' %}
+                  </span>
+                  <span class="flex items-center gap-1">
+                      <span class="hidden desktop:inline-block">All</span>
+                      <span>Filters</span>
+                  </span>
+              </button>
+
+              {% for filter in filters limit: 5 %}
+
+                  <details data-facet id="facet_inline_{{ filter.label | escape | handleize }}" class="hidden desktop:block relative group">
+
+                      <summary class="modern-filter-dropdown bg-white hover:bg-gray-50 border border-gray-200 hover:border-golden-400 text-gray-700 font-medium py-3 px-4 rounded-full transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer flex items-center gap-2 group-open:bg-golden-50 group-open:border-golden-500 group-open:before:content-[''] group-open:before:fixed group-open:before:bg-transparent group-open:before:w-full group-open:before:h-full group-open:before:left-0 group-open:before:right-0 group-open:before:top-0 group-open:before:bottom-0 group-open:before:z-10">
+                          <span>{{ filter.label }}</span>
+                          <span class="filter-chevron transition-transform duration-300 group-open:rotate-180 text-golden-500">
+                              {% render 'icon-chevron-down' %}
+                          </span>
+                      </summary>
+
+                      {% case filter.type %}
+
+                          {% when 'list' %}
+
+                              {%- assign filterHandle = filter.label | escape | handleize -%}
+
+                              {% if filterHandle == 'metal' %}
+
+                                  <div data-facet-container class="absolute top-[calc(100%+10px)] left-0 bg-white border border-gray-200 rounded-2xl shadow-xl z-20 flex flex-col gap-4 w-[420px] p-4">
+                                      {% render 'filters-tile-facet', filter: filter, prefix: 'inline', reference: filterHandle, columns: 3, image_width: 24 %}
+                                  </div>
+
+                              {% elsif filterHandle == 'stone' %}
+
+                                  <div data-facet-container class="absolute top-[calc(100%+10px)] left-0 bg-white border border-gray-200 rounded-2xl shadow-xl z-20 flex flex-col gap-4 w-[420px] p-4">
+                                      {% render 'filters-tile-facet', filter: filter, prefix: 'inline', reference: filterHandle, columns: 5, image_width: 24 %}
+                                  </div>
+
+                              {% elsif filterHandle == 'shape' %}
+
+                                  <div data-facet-container class="absolute top-[calc(100%+10px)] left-0 bg-white border border-gray-200 rounded-2xl shadow-xl z-20 flex flex-col gap-4 w-[420px] p-4">
+                                      {% render 'filters-tile-facet', filter: filter, prefix: 'inline', reference: 'center-stone-shape', columns: 5, image_width: 30 %}
+                                  </div>
+
+                              {% else %}
+
+                                  <div data-facet-container class="absolute top-[calc(100%+10px)] left-0 bg-white border border-gray-200 rounded-2xl shadow-xl z-20 px-6 py-6 flex flex-col gap-4 w-[280px]">
+                                      {% render 'filters-list-facet', filter: filter, prefix: 'inline' %}
+                                  </div>
+
+                              {% endif %}
+
+                          {% when 'price_range' %}
+
+                              <div data-facet-container class="absolute top-[calc(100%+10px)] left-0 bg-white border border-gray-200 rounded-2xl shadow-xl z-20 px-6 py-6 flex flex-col gap-4 w-[400px]">
+                                  {% render 'filters-price-facet', filter: filter, prefix: 'inline' %}
+                              </div>
+
+                      {% endcase %}
+
+                  </details>
+
+              {% endfor %}
+
+          </div>
+
+          <div class="pt-5 flex justify-between items-center largemobile:pt-0 laptop:w-3/12 largemobile:justify-end largemobile:gap-6">
+
+              <span data-filter-count class="whitespace-nowrap text-gray-600 font-medium">{{ count }} {{ count | pluralize: 'item', 'items' }}</span>
+
+              <div class="">{% render 'sort-by', search_page: search_page %}</div>
+
+          </div>
+
+      </div>
+
+      <div class="inline-active-facets w-full hidden desktop:block mt-4">
+
+          {% render 'filters-active-facets', search_page: search_page %}
+
+          <style>
+
+              .inline-active-facets [data-active-facets] {
+                  gap: 12px;
+              }
+
+              .inline-active-facets facet-remove a:after {
+                  content: '|';
+                  display: inline-block;
+                  margin-left: 12px;
+                  position: relative;
+                  top: -2px;
+                  color: #d1d5db;
+              }
+
+              .inline-active-facets facet-remove:last-of-type a:after {
+                  content: '';
+              }
+
+              .inline-active-facets facet-remove a {
+                  border: none;
+                  margin-top: 20px;
+                  padding: 0;
+                  color: #6b7280;
+                  transition: color 0.2s ease;
+              }
+
+              .inline-active-facets facet-remove a:hover {
+                  background-color: transparent;
+                  text-decoration: underline;
+                  color: #374151;
+              }
+          </style>
+
+      </div>
+
+  </form>
+
+</filters-form>
+
+<style>
+
+  #filters [data-content] {
+      height: 100%;
+  }
+
+  #product_grid.loading {
+      opacity: 0.5;
+  }
+
+  /* Botões modernos dos filtros */
+  .modern-filter-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .modern-filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .modern-filter-btn:hover::before {
+    left: 100%;
+  }
+  
+  .modern-filter-dropdown {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .modern-filter-dropdown::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,140,0,0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  .modern-filter-dropdown:hover::before {
+    left: 100%;
+  }
+
+  /* Ícones de filtro com tamanhos harmonizados */
+  .filter-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .filter-chevron {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  /* Ajustes responsivos */
+  @media (max-width: 768px) {
+    .filter-icon {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .filter-chevron {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  /* Ajustes para botões */
+  .btn .filter-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* Garantir que os SVGs preencham o container */
+  .filter-icon svg,
+  .filter-chevron svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Animações suaves para acordeões */
+  component-accordion {
+    transition: all 0.3s ease;
+  }
+  
+  component-accordion:hover {
+    transform: translateY(-1px);
+  }
+
+</style>

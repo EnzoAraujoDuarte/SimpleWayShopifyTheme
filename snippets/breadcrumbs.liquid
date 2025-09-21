@@ -1,0 +1,121 @@
+<nav class="breadcrumbs" role="navigation" aria-label="Breadcrumb navigation">
+
+    <ul class="flex items-center flex-wrap text-xs uppercase py-4" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/" itemprop="item" title="Return to homepage">
+                <span class="hidden lg:inline" itemprop="name">Home</span>
+                <meta itemprop="position" content="1" />
+            </a>
+        </li>
+
+        {% if template contains 'page' %}
+
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span class="mx-1">/</span>
+                <span itemprop="name" aria-current="page">{{ page.title }}</span>
+                <meta itemprop="position" content="2" />
+            </li>
+
+        {% elsif template contains 'search' %}
+
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span class="mx-1">/</span>
+                <span itemprop="name" aria-current="page">Searching for "{{ search.terms }}"</span>
+                <meta itemprop="position" content="2" />
+            </li>
+
+        {% elsif template contains 'product' %}
+
+            {% if collection.url %}
+
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    {% render 'icon-arrow' %}
+                    <span class="mx-1 hidden lg:inline">/</span>
+                    <a href="{{ collection.url }}" itemprop="item">
+                        <span itemprop="name">{{ collection.title }}</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+
+            {% endif %}
+
+            <li itemprop="itemListElement" class="hidden normal-case text-primary-300 lg:block" itemscope itemtype="https://schema.org/ListItem">
+                <span class="mx-1">/</span>
+                <span itemprop="name" aria-current="product">{{ product.title }}</span>
+                <meta itemprop="position" content="3" />
+            </li>
+
+        {% elsif template contains 'collection' %}
+
+            <li itemprop="itemListElement" class="hidden text-primary-300 lg:block" itemscope itemtype="https://schema.org/ListItem">
+                <span class="mx-1">/</span>
+                <span itemprop="name" aria-current="product">{{ collection.title }}</span>
+                <meta itemprop="position" content="3" />
+            </li>
+
+        {% elsif template == 'list-collections' %}
+
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span class="mx-1">/</span>
+                <span itemprop="name" aria-current="collections">All Collections</span>
+                <meta itemprop="position" content="2" />
+            </li>
+
+        {% elsif template == 'blog' %}
+
+            {% if current_tags %}
+
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span class="mx-1">/</span>
+                    <a href="{{ blog.url }}" itemprop="item">
+                        <span itemprop="name">{{ blog.title }}</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span class="mx-1">/</span>
+                    <span itemprop="name" aria-current="blog">{{ current_tags | join: " + " }}</span>
+                    <meta itemprop="position" content="3" />
+                </li>
+
+            {% else %}
+
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span class="mx-1">/</span>
+                    <span itemprop="name" aria-current="blog">{{ blog.title }}</span>
+                    <meta itemprop="position" content="2" />
+                </li>
+
+            {% endif %}
+
+        {% elsif template == 'article' %}
+
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span class="mx-1">/</span>
+                <a href="{{ blog.url }}" class="text-black hover:text-gray-700 transition-colors" itemprop="item">
+                    <span itemprop="name">{{ blog.title }}</span>
+                </a>
+                <meta itemprop="position" content="2" />
+            </li>
+
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span class="mx-1">/</span>
+                <span itemprop="name" aria-current="article">{{ article.title }}</span>
+                <meta itemprop="position" content="3" />
+            </li>
+
+        {% else %}
+
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span class="mx-1">/</span>
+                <span itemprop="name" aria-current="page">{{ page_title }}</span>
+                <meta itemprop="position" content="2" />
+            </li>
+
+        {% endif %}
+
+    </ul>
+
+</nav>

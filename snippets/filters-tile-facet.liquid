@@ -1,0 +1,224 @@
+<div class="option-tile" data-columns-count="{{ columns }}">
+
+  <div class="option-tile_options grid grid-cols-3 gap-2 p-1">
+
+    {% for value in filter.values %}
+
+      {% if value.count > 0 %}
+
+          <label for="Filter-{{ filter.label | escape }}-{{ forloop.index }}-{{ prefix }}" class="mb-0 cursor-pointer w-full flex items-center justify-between hover:shadow-md transition-all duration-300 {% if value.active %}active{% endif %} bg-white border border-gray-200 rounded-xl p-4 hover:border-golden-400 hover:bg-golden-50 relative overflow-hidden group">
+              
+              <input
+                  type="checkbox"
+                  class="mb-0 visually-hidden-checkbox"
+                  autocomplete="off"
+                  name="{{ value.param_name }}"
+                  value="{{ value.value }}"
+                  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}-{{ prefix }}"
+                  data-filter-id="{{ filter.label | escape }}-{{ value.value | escape }}"
+                  data-filter-name="{{ filter.label | escape }}"
+                  {% if value.active %}
+                      checked
+                  {% endif %}
+                  {% if value.count == 0 and value.active == false %}
+                      disabled
+                  {% endif %}
+              >
+
+              {%- assign tile_handle = value.label | handleize -%}
+              {%- assign title_metaobject = metaobjects[reference][tile_handle] -%}
+              {%- assign image_width = image_width | default: 50 -%}
+
+              {% if title_metaobject %}
+                <div class="image-container mb-2">
+                  {{ title_metaobject.image | image_url: width: image_width | image_tag: class: 'transition-transform duration-300 group-hover:scale-110' }}
+                </div>
+              {% endif %}
+
+              <span class="text-sm font-medium text-gray-700 group-hover:text-golden-600 transition-colors duration-300">{{- value.label | escape -}}</span>
+              
+              <!-- Shimmer effect on hover -->
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full transition-transform duration-500 group-hover:translate-x-full"></div>
+              
+          </label>
+
+      {% endif %}
+
+    {% endfor %}
+
+  </div>
+
+</div>
+
+{% stylesheet %}
+
+  .visually-hidden-checkbox {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .option-tile {
+    display: block;
+
+    &[data-columns-count="2"] .option-tile_options {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &[data-columns-count="4"] .option-tile_options {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    &[data-columns-count="5"] .option-tile_options {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  .option-tile_wrapper {
+    transition: height 0.3s ease-in-out;
+    height: auto;
+    overflow: hidden;
+
+    &.expanded {
+      height: auto;
+    }
+  }
+
+  .option-tile_options {
+
+    label:has(input:checked) {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-color: #f59e0b;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      transform: translateY(-2px);
+
+      span {
+        color: #92400e;
+        font-weight: 600;
+      }
+
+      &::after {
+        content: '✓';
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 20px;
+        height: 20px;
+        background: #f59e0b;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+        animation: checkmark 0.3s ease-in-out;
+      }
+    }
+
+    label,
+    a {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      outline-offset: -1px;
+      position: relative;
+      min-height: 80px;
+
+      &:focus-visible {
+        outline: 2px solid #f59e0b;
+        outline-offset: 2px;
+      }
+
+      &:has(input:focus-visible) {
+        outline: 2px solid #f59e0b;
+        outline-offset: 2px;
+      }
+    }
+
+    .image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 40px;
+    }
+  }
+
+  .option-tile_see-more {
+    display: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    position: relative;
+    top: -1px;
+    width: 100%;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    cursor: pointer;
+    background: white;
+    transition: all 0.3s ease;
+
+    &:focus-visible {
+      outline: 2px solid #f59e0b;
+      outline-offset: 2px;
+    }
+
+    &.visible {
+      display: flex;
+    }
+
+    &:hover {
+      background: #f9fafb;
+      border-color: #f59e0b;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon {
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+
+  @keyframes checkmark {
+    0% {
+      transform: scale(0) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.2) rotate(180deg);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1) rotate(360deg);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .option-tile_wrapper,
+    .option-tile_see-more .icon,
+    label,
+    .image-container img {
+      transition: none;
+    }
+    
+    @keyframes checkmark {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+  }
+
+{% endstylesheet %}

@@ -1,0 +1,522 @@
+{% comment %}
+  Brand Popup Snippet
+  Features:
+  - Each popup can have maximum 4 elements (text or image)
+  - Each brand has its own individual popup with unique content
+  - No popup titles - clean interface focused on options
+  - Responsive grid layout: 1 item = centered, 2 items = 2x1, 3 items = 2x1 + centered, 4 items = 2x2
+  - Fallback to "View All Products" if no options are configured for a brand
+{% endcomment %}
+
+{% if section.settings.enable_popup %}
+  <!-- Individual Popup Modals for each brand -->
+  {% for brand_block in section.blocks %}
+    {% if brand_block.type == 'brand' %}
+      <div id="brand-popup-{{ brand_block.id }}" class="brand-popup-overlay" style="display: none;">
+        <div class="brand-popup">
+          <button class="brand-popup-close" aria-label="Close popup">&times;</button>
+          <div class="brand-popup-content">
+            <div class="brand-popup-grid">
+              {% comment %} Find all popup items that reference this brand (max 4) {% endcomment %}
+              {% assign popup_items = 0 %}
+              {% assign has_popup_items = false %}
+              
+              {% for popup_block in section.blocks %}
+                {% if popup_items < 4 %}
+                  {% if popup_block.type == 'popup_image' or popup_block.type == 'popup_text' %}
+                    {% if popup_block.settings.brand_reference == brand_block.id %}
+                    {% assign has_popup_items = true %}
+                    {% assign popup_items = popup_items | plus: 1 %}
+                    {% assign link_url = '#' %}
+                    {% assign has_link = false %}
+                    
+                    {% unless popup_block.settings.link_type == 'none' %}
+                      {% case popup_block.settings.link_type %}
+                        {% when 'collection' %}
+                          {% if popup_block.settings.collection %}
+                            {% assign link_url = popup_block.settings.collection.url %}
+                            {% assign has_link = true %}
+                          {% endif %}
+                        {% when 'product' %}
+                          {% if popup_block.settings.product %}
+                            {% assign link_url = popup_block.settings.product.url %}
+                            {% assign has_link = true %}
+                          {% endif %}
+                        {% when 'url' %}
+                          {% if popup_block.settings.custom_url != blank %}
+                            {% assign link_url = popup_block.settings.custom_url %}
+                            {% assign has_link = true %}
+                          {% endif %}
+                      {% endcase %}
+                    {% endunless %}
+                    
+                    <div class="brand-popup-item {% if popup_block.type == 'popup_text' %}brand-popup-item--text{% endif %}" {{ popup_block.shopify_attributes }}>
+                      {% if has_link %}<a href="{{ link_url }}" class="brand-popup-item-link">{% endif %}
+                        
+                        {% if popup_block.type == 'popup_image' %}
+                          {% if popup_block.settings.image != blank %}
+                            <div class="brand-popup-image-wrapper">
+                              <img 
+                                src="{{ popup_block.settings.image | img_url: '400x300' }}" 
+                                alt="{{ popup_block.settings.title | default: popup_block.settings.image.alt | escape }}"
+                                class="brand-popup-image"
+                                loading="lazy"
+                                width="200"
+                                height="150">
+                              
+                              {% if popup_block.settings.show_overlay %}
+                                <div class="brand-popup-image-overlay"></div>
+                              {% endif %}
+                              
+                              {% if popup_block.settings.title != blank or popup_block.settings.subtitle != blank %}
+                                <div class="brand-popup-text brand-popup-text--{{ popup_block.settings.text_position }}"
+                                     style="color: {{ popup_block.settings.text_color }};">
+                                  {% if popup_block.settings.title != blank %}
+                                    <h4 class="brand-popup-text-title">{{ popup_block.settings.title }}</h4>
+                                  {% endif %}
+                                  {% if popup_block.settings.subtitle != blank %}
+                                    <p class="brand-popup-text-subtitle">{{ popup_block.settings.subtitle }}</p>
+                                  {% endif %}
+                                </div>
+                              {% endif %}
+                            </div>
+                          {% else %}
+                            <div class="brand-popup-placeholder">
+                              <div class="brand-popup-placeholder-content">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                                  <polyline points="21,15 16,10 5,21"/>
+                                </svg>
+                                <p>Add Image</p>
+                              </div>
+                            </div>
+                          {% endif %}
+                          
+                        {% elsif popup_block.type == 'popup_text' %}
+                          <div class="brand-popup-text-block" 
+                               style="background-color: {{ popup_block.settings.background_color }}; color: {{ popup_block.settings.text_color }}; text-align: {{ popup_block.settings.text_alignment }};">
+                            <div class="brand-popup-text-content">
+                              {% if popup_block.settings.title != blank %}
+                                <h4 class="brand-popup-text-block-title" style="font-size: {{ popup_block.settings.font_size | plus: 4 }}px;">{{ popup_block.settings.title }}</h4>
+                              {% endif %}
+                              {% if popup_block.settings.content != blank %}
+                                <p class="brand-popup-text-block-content" style="font-size: {{ popup_block.settings.font_size }}px;">{{ popup_block.settings.content }}</p>
+                              {% endif %}
+                            </div>
+                          </div>
+                        {% endif %}
+                        
+                      {% if has_link %}</a>{% endif %}
+                    </div>
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+              
+              {% comment %} Show fallback message if no popup items are configured for this brand {% endcomment %}
+              {% unless has_popup_items %}
+                <div class="brand-popup-item brand-popup-item--fallback">
+                  <a href="{{ brand_block.settings.collection.url }}" class="brand-popup-item-link">
+                    <div class="brand-popup-text-block" style="background-color: #f8f9fa; color: #333333; text-align: center;">
+                      <div class="brand-popup-text-content">
+                        <h4 class="brand-popup-text-block-title" style="font-size: 20px;">View All Products</h4>
+                        <p class="brand-popup-text-block-content" style="font-size: 16px;">Browse all products from {{ brand_block.settings.collection.title | default: 'this brand' }}</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              {% endunless %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  <script>
+  // Brand Popup functionality
+  (function() {
+    const brandCards = document.querySelectorAll('[data-brand-id]');
+    let currentPopup = null;
+    
+    // Add click event to brand cards
+    brandCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const brandId = this.getAttribute('data-brand-id');
+        const popup = document.getElementById('brand-popup-' + brandId);
+        
+        if (popup) {
+          currentPopup = popup;
+          // Show popup
+          popup.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+          
+          // Add animation
+          setTimeout(() => {
+            popup.classList.add('show');
+          }, 10);
+        }
+      });
+    });
+    
+    // Close popup function
+    function closePopup() {
+      if (currentPopup) {
+        currentPopup.classList.remove('show');
+        setTimeout(() => {
+          currentPopup.style.display = 'none';
+          document.body.style.overflow = '';
+          currentPopup = null;
+        }, 300);
+      }
+    }
+    
+    // Add event listeners to all close buttons and overlay clicks
+    const allPopups = document.querySelectorAll('[id^="brand-popup-"]');
+    allPopups.forEach(popup => {
+      const closeBtn = popup.querySelector('.brand-popup-close');
+      
+      // Close button event
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closePopup);
+      }
+      
+      // Close on overlay click
+      popup.addEventListener('click', function(e) {
+        if (e.target === this) {
+          closePopup();
+        }
+      });
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && currentPopup && currentPopup.style.display === 'flex') {
+        closePopup();
+      }
+    });
+  })();
+  </script>
+
+  <style>
+  /* Brand Popup Styles */
+  .brand-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .brand-popup-overlay.show {
+    opacity: 1;
+  }
+
+  .brand-popup {
+    position: relative;
+    background: #fff;
+    border-radius: 20px;
+    max-width: 95%;
+    max-height: 90%;
+    width: 800px;
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  }
+
+  .brand-popup-overlay.show .brand-popup {
+    transform: scale(1);
+  }
+
+  .brand-popup-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .brand-popup:hover .brand-popup-close {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .brand-popup-close:hover {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: scale(1.1);
+  }
+
+  .brand-popup-content {
+    padding: 2rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 transparent;
+  }
+
+  /* Custom Scrollbar for Webkit browsers */
+  .brand-popup-content::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .brand-popup-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .brand-popup-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #e0e0e0 0%, #c1c1c1 100%);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  .brand-popup-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #d0d0d0 0%, #a1a1a1 100%);
+    background-clip: content-box;
+  }
+
+  .brand-popup-content:not(:hover)::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .brand-popup-content:hover::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #e0e0e0 0%, #c1c1c1 100%);
+    background-clip: content-box;
+  }
+
+  .brand-popup-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 100%;
+  }
+
+  /* Responsive grid adjustments based on number of items (max 4) */
+  .brand-popup-grid:has(.brand-popup-item:nth-child(1):last-child) {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .brand-popup-grid:has(.brand-popup-item:nth-child(3):last-child) .brand-popup-item:nth-child(3) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 0.5rem);
+    margin: 0 auto;
+  }
+
+  .brand-popup-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 200px;
+  }
+
+  .brand-popup-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  .brand-popup-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+  }
+
+  .brand-popup-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .brand-popup-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .brand-popup-item:hover .brand-popup-image {
+    transform: scale(1.05);
+  }
+
+  .brand-popup-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .brand-popup-item:hover .brand-popup-image-overlay {
+    opacity: 0.8;
+  }
+
+  .brand-popup-text {
+    position: absolute;
+    z-index: 2;
+    padding: 1rem;
+    pointer-events: none;
+  }
+
+  .brand-popup-text--center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .brand-popup-text--top-left {
+    top: 0;
+    left: 0;
+  }
+
+  .brand-popup-text--top-right {
+    top: 0;
+    right: 0;
+    text-align: right;
+  }
+
+  .brand-popup-text--bottom-left {
+    bottom: 0;
+    left: 0;
+  }
+
+  .brand-popup-text--bottom-right {
+    bottom: 0;
+    right: 0;
+    text-align: right;
+  }
+
+  .brand-popup-text-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .brand-popup-text-subtitle {
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin: 0;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+
+  /* Text Block Styles */
+  .brand-popup-item--text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-popup-text-block {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .brand-popup-item--text:hover .brand-popup-text-block {
+    transform: scale(1.02);
+  }
+
+  .brand-popup-text-content {
+    max-width: 100%;
+  }
+
+  .brand-popup-text-block-title {
+    font-weight: bold;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+  }
+
+  .brand-popup-text-block-content {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .brand-popup-placeholder {
+    width: 100%;
+    height: 200px;
+    background: #f5f5f5;
+    border: 2px dashed #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  .brand-popup-placeholder-content {
+    text-align: center;
+    color: #999;
+  }
+
+  .brand-popup-placeholder-content svg {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .brand-popup {
+      width: 95%;
+      max-height: 95%;
+      max-width: 95%;
+    }
+    
+    .brand-popup-close {
+      top: 15px;
+      right: 15px;
+      width: 35px;
+      height: 35px;
+      font-size: 1.25rem;
+    }
+    
+    .brand-popup-content {
+      padding: 1.5rem;
+      max-height: 85vh;
+    }
+    
+    .brand-popup-grid {
+      grid-template-columns: 1fr !important;
+      gap: 0.75rem;
+    }
+  }
+  </style>
+{% endif %} 

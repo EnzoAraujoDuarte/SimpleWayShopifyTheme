@@ -1,0 +1,18 @@
+
+@import "base/image.css";
+@import "base/typography.css";
+@import "base/icons.css";
+@import "base/forms.css";
+@import "base/button.css";
+@import "base/golden-theme.css";
+
+@import "components/accordion.css";
+@import "components/side-drawer.css";
+@import "components/quantity-selector.css";
+@import "components/menu.css";
+@import "components/product-slide.css";
+@import "components/product-card.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

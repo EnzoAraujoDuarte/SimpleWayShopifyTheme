@@ -1,0 +1,75 @@
+{% if search_page %}
+	{% assign sort_options = search.sort_options %}
+	{% assign sort_by = search.sort_by | default: search.default_sort_by %}
+{% else %}
+	{% assign sort_options = collection.sort_options %}
+	{%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+{% endif %}
+
+<component-sort-by class="flex items-center gap-1 text-primary-300">
+
+	<span class="block w-[90px]">Sort by:</span>
+
+	<select id="sort-by" name="sort_by" class="border-none py-0 pl-0 font-normal focus-within:text-primary-500 focus-within:underline">
+
+		{% for option in sort_options %}
+			<option
+				value="{{ option.value }}"
+				{% if option.value == sort_by %}
+					selected="selected"
+				{% endif %}
+			>
+				{{ option.name }}
+			</option>
+		{% endfor %}
+	</select>
+
+</component-sort-by>
+
+<script>
+
+	class ComponentSortBy extends HTMLElement {
+
+		/**
+		 * Sort By web component constructor.
+		 */
+		constructor() {
+			super();
+			this.initEvents();
+		}
+
+		/**
+		 * Initialize module events
+		 */
+		initEvents() {
+			this.initSortBy();
+		}
+
+		/**
+		 * Initialize Sort by functionality
+		 */
+		initSortBy() {
+
+			const selects = this.querySelectorAll('select');
+
+			selects.forEach((select) => {
+
+				select.addEventListener('change', () => {
+
+					const sortByValue = select.value || select.defaultSort;
+					const urlSearchParams = new URLSearchParams(window.location.search);
+
+					if (urlSearchParams.has('page')) {
+						urlSearchParams.delete('page');
+					}
+
+					urlSearchParams.set('sort_by', sortByValue);
+				});
+			});
+		}
+	}
+
+	// Register the custom element
+	customElements.define('component-sort-by', ComponentSortBy);
+
+</script>

@@ -1,0 +1,161 @@
+{%- assign menu = linklists.main-menu -%}
+
+<!-- Drawer component -->
+<side-drawer id="main-menu" class="menu__side-drawer laptop:!block laptop:relative laptop:z-auto golden-menu-mobile">
+
+  <component-menu>
+
+    <ul class="flex flex-col gap-10 pt-0 pb-20 px-14 relative laptop:justify-center laptop:flex-row laptop:items-center laptop:py-0 laptop:px-5 laptop:gap-0 desktop:gap-5">
+
+      {%- for level_1_link in menu.links -%}
+
+        {% comment %} Level 1 {% endcomment %}
+        <li data-level="1" data-item="{{ forloop.index }}">
+
+          <div class="item flex justify-between items-center laptop:!opacity-100 laptop:relative laptop:py-3 laptop:px-2 desktop:px-3">
+
+            <a href="{{ level_1_link.url }}" class="text-2xl laptop:text-sm laptop:uppercase golden-nav-link">{{ level_1_link.title }}</a>
+
+            {%- if level_1_link.links.size > 0 -%}
+              <button data-open-submenu="1-{{ forloop.index }}" class="p-1 relative -right-3 rounded-full hover:bg-golden-200 transition-colors duration-200 laptop:p-0 laptop:bg-transparent laptop:absolute laptop:-right-2 laptop:hover:bg-transparent desktop:-right-5 group golden-nav-icon" aria-label="Open submenu">
+                <div class="size-5 -rotate-90 laptop:rotate-0 laptop:hidden group-focus-within:block">
+                  {% render 'icon-arrow' %}
+                </div>
+              </button>
+            {%- endif -%}
+
+          </div>
+
+          {%- if level_1_link.links.size > 0 -%}
+
+            <div class="submenu flex-col z-10 gap-7 pt-0 px-14 absolute top-0 bottom-0 left-0 right-0 golden-submenu laptop:px-0 laptop:bottom-auto laptop:border-t laptop:border-b laptop:top-1" data-submenu="1-{{ forloop.index }}">
+
+              <div class="item flex items-center gap-4 laptop:hidden">
+                <button data-close-submenu="1-{{ forloop.index }}" class="p-1 rounded-full hover:bg-golden-200 transition-colors duration-200 golden-nav-icon">
+                  <div class="size-5">
+                    {% render 'icon-arrow-outline' %}
+                  </div>
+                </button>
+                <div class="text-2xl">{{ level_1_link.title }}</div>
+              </div>
+
+              <ul class="flex flex-col gap-5 pl-10 pt-1 laptop:py-7 laptop:container laptop:mx-auto laptop:px-5 laptop:flex-row laptop:gap-20 laptop:justify-center">
+              
+                {%- for level_2_link in level_1_link.links -%}
+
+                  {% unless level_2_link.links.size > 0 %}
+                      
+                <li
+                  data-level="2"
+                  data-item="{{ forloop.index }}"
+                  class="flex flex-col gap-5">
+                        
+                        <div class="item flex justify-between items-center">
+                          <a href="{{ level_2_link.url }}" class="text-xl laptop:text-sm laptop:uppercase laptop:font-medium golden-nav-link">{{ level_2_link.title }}</a>
+                        </div>
+
+                      </li>
+
+                    {% endunless %}
+                    
+                  {%- endfor -%}
+              
+                {%- for level_2_link in level_1_link.links -%}
+
+                  {% if level_2_link.links.size > 0 %}
+
+                    {% comment %} Level 2 {% endcomment %}
+                    <li
+                      data-level="2"
+                      data-item="{{ forloop.index }}"
+                      class="">
+
+                      <div class="item flex justify-between items-center">
+                        <a href="{{ level_2_link.url }}" class="text-xl laptop:text-sm laptop:uppercase laptop:font-medium golden-nav-link">{{ level_2_link.title }}</a>
+                        {%- if level_2_link.links.size > 0 -%}
+                          <button data-toggle-submenu="2-{{ forloop.index }}" class="p-1 rounded-full hover:bg-golden-200 transition-colors duration-200 laptop:hidden golden-nav-icon">
+                            <div class="size-5">
+                              {% render 'icon-arrow' %}
+                            </div>
+                          </button>
+                        {%- endif -%}
+                      </div>
+
+                      {%- if level_2_link.links.size > 0 -%}
+                        <div class="submenu hidden laptop:!block" data-submenu="2-{{ forloop.index }}">
+                          <ul class="mt-4 pl-4 ml-1 mb-2 flex flex-col gap-4 border-l border-base-border laptop:border-none laptop:px-0 laptop:ml-0 laptop:gap-4">
+                            {%- for level_3_link in level_2_link.links -%}
+
+                              {% comment %} Level 3 {% endcomment %}
+                              <li
+                                data-level="3"
+                                data-item="{{ forloop.index }}"
+                                class="laptop:text-sm">
+                                <div class="item">
+                                <a href="{{ level_3_link.url }}" class="golden-nav-link">{{ level_3_link.title }}</a>
+                                </div>
+                              </li>
+
+                            {%- endfor -%}
+                          </ul>
+                        </div>
+                      {%- endif -%}
+
+                    </li>
+
+                  {% endif %}
+
+                {%- endfor -%}
+              </ul>
+
+            </div>
+          {%- endif -%}
+
+        </li>
+
+      {%- endfor -%}
+
+    </ul>
+
+  </component-menu>
+
+</side-drawer>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const drawer = document.getElementById('main-menu');
+    const menu = drawer.querySelector('component-menu');
+
+    // Handle drawer open/close and menu open/close
+    // Set up drawer callbacks
+    drawer.afterOpen = () => {
+      if (menu) {
+        menu.enable();
+      }
+    };
+
+    drawer.beforeClose = () => {
+      if (menu) {
+        menu.disable();
+      }
+    };
+
+    // Handle initial state and breakpoint changes to disable/enable the drawer and menu mobile
+    handleBreakpoint();
+    window.addEventListener('screen-breakpoint', (event) => handleBreakpoint(event));
+
+    function handleBreakpoint(event) {
+      const currentMode = event ? event.detail.mode : window.screenMode;
+
+      const isLaptopOrAbove = ['laptop', 'desktop', 'wide'].includes(currentMode);
+
+      if (isLaptopOrAbove) {
+        drawer.disable();
+      } else {
+        drawer.enable();
+      }
+    }
+  });
+</script>

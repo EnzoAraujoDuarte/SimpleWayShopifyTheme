@@ -1,0 +1,695 @@
+{%- assign settings = block.settings -%}
+{%- assign text_color = settings.color | append: ' ' | append: settings.color_tablet | append: ' ' | append: settings.color_desktop -%}
+{%- assign alignment = settings.alignment | append: ' ' | append: settings.alignment_tablet | append: ' ' | append: settings.alignment_desktop -%}
+{%- assign size = settings.size | append: ' ' | append: settings.size_tablet | append: ' ' | append: settings.size_desktop -%}
+{%- assign padding_top = settings.padding_top | append: ' ' | append: settings.padding_top_tablet | append: ' ' | append: settings.padding_top_desktop -%}
+{%- assign padding_bottom = settings.padding_bottom | append: ' ' | append: settings.padding_bottom_tablet | append: ' ' | append: settings.padding_bottom_desktop -%}
+{%- assign uppercase = settings.uppercase -%}
+
+<div class="{{ text_color }} {{ alignment }} {{ size }} {{ padding_top }} {{ padding_bottom }} {% if uppercase %}uppercase{% endif %} *:m-0">{{ block.settings.text }}</div>
+
+{% schema %}
+{
+  "name": "Heading",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "advanced_settings",
+      "label": "Advanced Settings",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<h2>A Promise of <em>FOREVER</em></h2>"
+    },
+    {
+			"type": "header",
+			"content": "Appearance",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+      "type": "checkbox",
+      "id": "uppercase",
+      "label": "Uppercase",
+      "default": false
+    },
+    {
+			"type": "select",
+			"id": "color",
+			"label": "Color",
+			"options": [
+				{
+					"value": "text-onBase-background",
+					"label": "Default"
+				},
+				{
+					"value": "text-white",
+					"label": "White"
+				}
+			],
+			"default": "text-onBase-background"
+		},
+    {
+			"type": "header",
+			"content": "Mobile",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "size",
+			"label": "Size",
+			"options": [
+				{
+					"value": "text-base",
+					"label": "Base"
+				},
+        {
+          "value": "text-xs",
+          "label": "12px - Xs"
+        },
+        {
+          "value": "text-sm",
+          "label": "14px - Sm"
+        },
+        {
+          "value": "text-md",
+          "label": "16px - Md"
+        },
+        {
+					"value": "text-lg",
+					"label": "18px - Lg"
+				},
+				{
+					"value": "text-xl",
+					"label": "20px - Xl"
+				},
+				{
+					"value": "text-2xl",
+					"label": "24px - 2xl"
+				},
+				{
+					"value": "text-3xl",
+					"label": "32px - 3xl"
+				},
+        {
+					"value": "text-4xl",
+					"label": "40px - 4xl"
+				},
+        {
+					"value": "text-5xl",
+					"label": "48px - 5xl"
+				},
+        {
+					"value": "text-6xl",
+					"label": "64px - 6xl"
+				}
+			],
+			"default": "text-3xl"
+		},
+    {
+			"type": "select",
+			"id": "padding_top",
+			"label": "Padding Top",
+			"options": [
+				{
+					"value": "pt-0",
+					"label": "0px"
+				},
+				{
+					"value": "pt-1",
+					"label": "4px"
+				},
+				{
+					"value": "pt-2",
+					"label": "8px"
+				},
+				{
+					"value": "pt-3",
+					"label": "12px"
+				},
+        {
+          "value": "pt-4",
+          "label": "16px"
+        },
+				{
+					"value": "pt-5",
+					"label": "20px"
+				},
+        {
+          "value": "pt-6",
+          "label": "24px"
+        },
+        {
+          "value": "pt-7",
+          "label": "28px"
+        },
+        {
+          "value": "pt-8",
+          "label": "32px"
+        },
+        {
+          "value": "pt-9",
+          "label": "36px"
+        },
+				{
+					"value": "pt-10",
+					"label": "40px"
+				},
+				{
+					"value": "pt-15",
+					"label": "60px"
+				},
+				{
+					"value": "pt-20",
+					"label": "80px"
+				}
+			],
+			"default": "pt-0"
+		},
+    {
+			"type": "select",
+			"id": "padding_bottom",
+			"label": "Padding Bottom",
+			"options": [
+				{
+					"value": "pb-0",
+					"label": "0px"
+				},
+				{
+					"value": "pb-1",
+					"label": "4px"
+				},
+				{
+					"value": "pb-2",
+					"label": "8px"
+				},
+				{
+					"value": "pb-3",
+					"label": "12px"
+				},
+        {
+          "value": "pb-4",
+          "label": "16px"
+        },
+				{
+					"value": "pb-5",
+					"label": "20px"
+				},
+        {
+          "value": "pb-6",
+          "label": "24px"
+        },
+        {
+          "value": "pb-7",
+          "label": "28px"
+        },
+        {
+          "value": "pb-8",
+          "label": "32px"
+        },
+        {
+          "value": "pb-9",
+          "label": "36px"
+        },
+				{
+					"value": "pb-10",
+					"label": "40px"
+				},
+        {
+					"value": "pb-15",
+					"label": "60px"
+				},
+        {
+					"value": "pb-20",
+					"label": "80px"
+				}
+			],
+			"default": "pb-0"
+		},
+    {
+			"type": "select",
+			"id": "alignment",
+			"label": "Alignment",
+			"options": [
+				{ "value": "", "label": "Default" },
+				{
+					"value": "text-left",
+					"label": "Left"
+				},
+				{
+					"value": "text-center",
+					"label": "Center"
+				},
+				{
+					"value": "text-right",
+					"label": "Right"
+				}
+			]
+		},
+    {
+			"type": "header",
+			"content": "Tablet",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "size_tablet",
+			"label": "Size",
+			"options": [
+				{
+          "value": "",
+          "label": "Same as Mobile"
+        },
+        {
+          "value": "tablet:text-xs",
+          "label": "12px - Xs"
+        },
+        {
+          "value": "tablet:text-sm",
+          "label": "14px - Sm"
+        },
+        {
+          "value": "tablet:text-md",
+          "label": "16px - Md"
+        },
+				{
+					"value": "tablet:text-lg",
+					"label": "18px - Lg"
+				},
+        {
+					"value": "tablet:text-xl",
+					"label": "20px - Xl"
+				},
+				{
+					"value": "tablet:text-2xl",
+					"label": "24px - 2xl"
+				},
+				{
+					"value": "tablet:text-3xl",
+					"label": "32px - 3xl"
+				},
+				{
+					"value": "tablet:text-4xl",
+					"label": "40px - 4xl"
+				},
+        {
+					"value": "tablet:text-5xl",
+					"label": "48px - 5xl"
+				},
+        {
+					"value": "tablet:text-6xl",
+					"label": "64px - 6xl"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "color_tablet",
+			"label": "Color",
+			"options": [
+				{ "value": "", "label": "Same as Mobile" },
+				{
+					"value": "tablet:text-onBase-background",
+					"label": "Default"
+				},
+				{
+					"value": "tablet:text-white",
+					"label": "White"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "padding_top_tablet",
+			"label": "Padding Top",
+			"options": [
+				{ "value": "", "label": "Same as Mobile" },
+				{
+					"value": "tablet:pt-0",
+					"label": "0px"
+				},
+        {
+					"value": "tablet:pt-1",
+					"label": "4px"
+				},
+        {
+					"value": "tablet:pt-2",
+					"label": "8px"
+				},
+        {
+					"value": "tablet:pt-3",
+					"label": "12px"
+				},
+        {
+          "value": "tablet:pt-4",
+          "label": "16px"
+        },
+				{
+					"value": "tablet:pt-5",
+					"label": "20px"
+				},
+        {
+          "value": "tablet:pt-6",
+          "label": "24px"
+        },
+        {
+          "value": "tablet:pt-7",
+          "label": "28px"
+        },
+        {
+          "value": "tablet:pt-8",
+          "label": "32px"
+        },
+        {
+          "value": "tablet:pt-9",
+          "label": "36px"
+        },
+				{
+					"value": "tablet:pt-10",
+					"label": "40px"
+				},
+        {
+					"value": "tablet:pt-15",
+					"label": "60px"
+				},
+        {
+					"value": "tablet:pt-20",
+					"label": "80px"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "padding_bottom_tablet",
+			"label": "Padding Bottom",
+			"options": [
+				{ "value": "", "label": "Same as Mobile" },
+				{
+					"value": "tablet:pb-0",
+					"label": "0px"
+				},
+        {
+					"value": "tablet:pb-1",
+					"label": "4px"
+				},
+        {
+					"value": "tablet:pb-2",
+					"label": "8px"
+				},
+				{
+					"value": "tablet:pb-3",
+					"label": "12px"
+				},
+        {
+          "value": "tablet:pb-4",
+          "label": "16px"
+        },
+				{
+					"value": "tablet:pb-5",
+					"label": "20px"
+				},
+				{
+          "value": "tablet:pb-6",
+          "label": "24px"
+        },
+        {
+          "value": "tablet:pb-7",
+          "label": "28px"
+        },
+        {
+          "value": "tablet:pb-8",
+          "label": "32px"
+        },
+        {
+          "value": "tablet:pb-9",
+          "label": "36px"
+        },
+				{
+					"value": "tablet:pb-10",
+					"label": "40px"
+				},
+        {
+					"value": "tablet:pb-15",
+					"label": "60px"
+				},
+        {
+					"value": "tablet:pb-20",
+					"label": "80px"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "alignment_tablet",
+			"label": "Alignment",
+			"options": [
+				{ "value": "", "label": "Same as Mobile" },
+				{
+					"value": "tablet:text-left",
+					"label": "Left"
+				},
+				{
+					"value": "tablet:text-center",
+					"label": "Center"
+				},
+				{
+					"value": "tablet:text-right",
+					"label": "Right"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "header",
+			"content": "Desktop",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "size_desktop",
+			"label": "Size",
+			"options": [
+				{
+          "value": "",
+          "label": "Same as Tablet"
+        },
+        {
+          "value": "laptop:text-xs",
+          "label": "12px - Xs"
+        },
+        {
+          "value": "laptop:text-sm",
+          "label": "14px - Sm"
+        },
+        {
+          "value": "laptop:text-md",
+          "label": "16px - Md"
+        },
+				{
+					"value": "laptop:text-lg",
+					"label": "18px - Lg"
+				},
+				{
+					"value": "laptop:text-xl",
+					"label": "20px - Xl"
+				},
+				{
+					"value": "laptop:text-2xl",
+					"label": "24px - 2xl"
+				},
+				{
+					"value": "laptop:text-3xl",
+					"label": "32px - 3xl"
+				},
+				{
+					"value": "laptop:text-4xl",
+					"label": "40px - 4xl"
+				},
+				{
+					"value": "laptop:text-5xl",
+					"label": "48px - 5xl"
+				},
+				{
+					"value": "laptop:text-6xl",
+					"label": "64px - 6xl"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "color_desktop",
+			"label": "Color",
+			"options": [
+				{ "value": "", "label": "Same as Tablet" },
+				{
+					"value": "laptop:text-onBase-background",
+					"label": "Default"
+				},
+				{
+					"value": "laptop:text-white",
+					"label": "White"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "padding_top_desktop",
+			"label": "Padding Top",
+			"options": [
+				{ "value": "", "label": "Same as Tablet" },
+				{
+					"value": "laptop:pt-0",
+					"label": "0px"
+				},
+        {
+					"value": "laptop:pt-1",
+					"label": "4px"
+				},
+        {
+					"value": "laptop:pt-2",
+					"label": "8px"
+				},
+				{
+					"value": "laptop:pt-3",
+					"label": "12px"
+				},
+        {
+          "value": "laptop:pt-4",
+          "label": "16px"
+        },
+				{
+					"value": "laptop:pt-5",
+					"label": "20px"
+				},
+        {
+          "value": "laptop:pt-6",
+          "label": "24px"
+        },
+        {
+          "value": "laptop:pt-7",
+          "label": "28px"
+        },
+        {
+          "value": "laptop:pt-8",
+          "label": "32px"
+        },
+        {
+          "value": "laptop:pt-9",
+          "label": "36px"
+        },
+				{
+					"value": "laptop:pt-10",
+					"label": "40px"
+				},
+        {
+					"value": "laptop:pt-15",
+					"label": "60px"
+				},
+        {
+					"value": "laptop:pt-20",
+					"label": "80px"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "padding_bottom_desktop",
+			"label": "Padding Bottom",
+			"options": [
+				{ "value": "", "label": "Same as Tablet" },
+				{
+					"value": "laptop:pb-0",
+					"label": "0px"
+				},
+        {
+					"value": "laptop:pb-1",
+					"label": "4px"
+				},
+        {
+					"value": "laptop:pb-2",
+					"label": "8px"
+				},
+				{
+					"value": "laptop:pb-3",
+					"label": "12px"
+				},
+        {
+          "value": "laptop:pb-4",
+          "label": "16px"
+        },
+				{
+					"value": "laptop:pb-5",
+					"label": "20px"
+				},
+				{
+          "value": "laptop:pb-6",
+          "label": "24px"
+        },
+        {
+          "value": "laptop:pb-7",
+          "label": "28px"
+        },
+        {
+          "value": "laptop:pb-8",
+          "label": "32px"
+        },
+        {
+          "value": "laptop:pb-9",
+          "label": "36px"
+        },
+				{
+					"value": "laptop:pb-10",
+					"label": "40px"
+				},
+        {
+					"value": "laptop:pb-15",
+					"label": "60px"
+				},
+        {
+					"value": "laptop:pb-20",
+					"label": "80px"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "alignment_desktop",
+			"label": "Alignment",
+			"options": [
+				{ "value": "", "label": "Same as Tablet" },
+				{
+					"value": "laptop:text-left",
+					"label": "Left"
+				},
+				{
+					"value": "laptop:text-center",
+					"label": "Center"
+				},
+				{
+					"value": "laptop:text-right",
+					"label": "Right"
+				}
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		}
+  ],
+  "presets": [
+    {
+      "name": "Heading",
+      "settings": {
+        "text": "<h2>A Promise of <em>FOREVER</em></h2>"
+      }
+    }
+  ]
+}
+{% endschema %}

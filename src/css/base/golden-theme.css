@@ -1,0 +1,309 @@
+/* Golden Theme Global Styles */
+
+/* Base Background */
+body {
+  @apply bg-golden-gradient-light min-h-screen;
+}
+
+/* Golden Theme Components */
+.golden-card {
+  @apply bg-golden-gradient-soft backdrop-blur-sm rounded-2xl shadow-golden-lg border-2 border-golden-300/30 p-6;
+}
+
+.golden-card-hover {
+  @apply golden-card transition-all duration-300 hover:shadow-golden-xl hover:scale-105 hover:-translate-y-1;
+}
+
+.golden-button {
+  @apply bg-golden-gradient text-white font-bold py-3 px-6 rounded-full shadow-golden transition-all duration-300 hover:shadow-golden-lg hover:scale-105 hover:-translate-y-1 text-shadow-sm;
+}
+
+.golden-button-outline {
+  @apply border-2 border-golden-400 text-golden-800 font-bold py-3 px-6 rounded-full transition-all duration-300 hover:bg-golden-gradient hover:text-white hover:shadow-golden;
+}
+
+.golden-input {
+  @apply w-full px-4 py-3 border-2 border-golden-300/40 rounded-xl bg-white/90 text-golden-900 transition-all duration-300 focus:border-golden-500 focus:shadow-golden focus:bg-white focus:-translate-y-1;
+}
+
+.golden-text-primary {
+  @apply text-golden-900 font-medium;
+}
+
+.golden-text-secondary {
+  @apply text-golden-800;
+}
+
+.golden-text-accent {
+  @apply text-golden-500 font-semibold;
+}
+
+.golden-heading {
+  @apply text-golden-900 font-bold text-center relative;
+}
+
+.golden-heading::after {
+  content: '';
+  @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-golden-gradient rounded-full;
+}
+
+.golden-section {
+  @apply py-16 px-4;
+}
+
+.golden-container {
+  @apply max-w-6xl mx-auto;
+}
+
+/* Header Styles */
+.golden-header {
+  @apply bg-gradient-to-r from-white via-golden-50 to-golden-100 shadow-golden-lg border-b-2 border-golden-300;
+}
+
+.golden-nav-link {
+  @apply text-golden-900 font-medium transition-all duration-300 hover:text-golden-700 hover:scale-105;
+}
+
+.golden-nav-icon {
+  @apply text-golden-900 transition-all duration-300 hover:text-golden-700 hover:scale-110;
+}
+
+.golden-menu-mobile {
+  @apply bg-gradient-to-b from-golden-50 to-white text-golden-900;
+}
+
+.golden-menu-mobile .golden-nav-link {
+  @apply text-golden-900 hover:text-golden-700;
+}
+
+.golden-submenu {
+  @apply bg-gradient-to-b from-golden-50 to-white border-golden-200;
+}
+
+.golden-submenu .golden-nav-link {
+  @apply text-golden-800 hover:text-golden-700;
+}
+
+/* Enhanced Dropdown Styles */
+.golden-dropdown {
+  @apply absolute top-full left-0 right-0 w-screen max-w-none z-50;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: 0;
+  margin-right: 0;
+  background: linear-gradient(135deg, #fefcbf 0%, #fef3c7 50%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 0 0 1.5rem 1.5rem;
+  box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.golden-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.golden-dropdown-content {
+  @apply py-8 px-8;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.golden-dropdown-item {
+  @apply text-center p-4;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.golden-dropdown-item:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(245, 158, 11, 0.4);
+  border-color: #f59e0b;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.golden-dropdown-link {
+  @apply text-lg font-bold text-golden-900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+.golden-dropdown-link:hover {
+  color: #d97706;
+  transform: scale(1.1);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .golden-dropdown {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    left: auto;
+    border-radius: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .golden-dropdown-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .golden-dropdown-item {
+    padding: 1rem;
+  }
+  
+  .golden-dropdown-link {
+    font-size: 1rem;
+  }
+}
+
+/* Form Styles */
+.golden-form {
+  @apply golden-card space-y-6;
+}
+
+.golden-form-title {
+  @apply golden-heading text-2xl mb-6;
+}
+
+.golden-form-group {
+  @apply space-y-2;
+}
+
+.golden-form-label {
+  @apply block text-golden-800 font-semibold text-sm;
+}
+
+.golden-form-submit {
+  @apply golden-button w-full text-lg py-4 relative overflow-hidden;
+}
+
+.golden-form-submit::before {
+  content: '';
+  @apply absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transform -translate-x-full transition-transform duration-500;
+}
+
+.golden-form-submit:hover::before {
+  @apply translate-x-full;
+}
+
+/* Link Styles */
+.golden-link {
+  @apply text-golden-500 font-medium transition-all duration-300 hover:text-golden-600 hover:underline;
+}
+
+.golden-link-button {
+  @apply golden-link inline-block px-4 py-2 rounded-lg bg-white/50 border border-golden-300/30 transition-all duration-300 hover:bg-golden-200/50 hover:border-golden-400 hover:shadow-golden hover:transform hover:translate-x-1;
+}
+
+/* Icon Styles */
+.golden-icon {
+  @apply text-golden-500 transition-all duration-300 hover:text-golden-600 hover:scale-110;
+}
+
+.golden-icon-bg {
+  @apply bg-golden-gradient p-2 rounded-full text-white shadow-golden;
+}
+
+/* Animation Classes */
+.golden-fade-in {
+  @apply animate-fade-in-up;
+}
+
+.golden-shimmer {
+  @apply relative overflow-hidden;
+}
+
+.golden-shimmer::before {
+  content: '';
+  @apply absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transform -translate-x-full animate-shimmer;
+}
+
+.golden-glow {
+  @apply animate-glow;
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .golden-card {
+    @apply p-4 rounded-xl;
+  }
+  
+  .golden-button {
+    @apply py-2 px-4 text-sm;
+  }
+  
+  .golden-section {
+    @apply py-12 px-3;
+  }
+}
+
+/* Success/Error States */
+.golden-success {
+  @apply bg-green-50 border-2 border-green-200 text-green-800 p-4 rounded-xl;
+}
+
+.golden-error {
+  @apply bg-red-50 border-2 border-red-200 text-red-800 p-4 rounded-xl;
+}
+
+.golden-warning {
+  @apply bg-yellow-50 border-2 border-yellow-200 text-yellow-800 p-4 rounded-xl;
+}
+
+/* Loading States */
+.golden-loading {
+  @apply opacity-50 pointer-events-none animate-pulse;
+}
+
+/* Backdrop Effects */
+.golden-backdrop {
+  @apply backdrop-blur-md bg-white/30 border border-golden-300/30;
+}
+
+/* Text Shadow Utilities */
+.text-shadow-sm {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.text-shadow-md {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text-shadow-lg {
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradient Text */
+.golden-gradient-text {
+  @apply bg-golden-gradient bg-clip-text text-transparent;
+}
+
+/* Special Effects */
+.golden-glass {
+  @apply bg-white/20 backdrop-blur-lg border border-white/30 shadow-golden-lg;
+}
+
+.golden-frosted {
+  @apply bg-golden-100/80 backdrop-blur-sm border border-golden-300/50;
+} 

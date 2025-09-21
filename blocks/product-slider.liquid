@@ -1,0 +1,45 @@
+<product-slide data-title="{{ block.settings.title }}" data-link="{{ block.settings.collection.url }}">
+
+  {% for product in block.settings.collection.products limit: block.settings.products_to_show %}
+    <product-slide-item data-handle="{{ product.handle }}"></product-slide-item>
+  {% endfor %}
+
+</product-slide>
+
+{% schema %}
+  {
+    "name": "Product Slider",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Products"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection",
+        "info": "Select a collection to display its products"
+      },
+      {
+        "type": "range",
+        "id": "products_to_show",
+        "min": 4,
+        "max": 12,
+        "step": 2,
+        "default": 8,
+        "label": "Number of products to show",
+        "info": "Applies only when selecting products from collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Slider",
+        "settings": {
+          "products_to_show": 4
+        }
+      }
+    ]
+  }
+{% endschema %}

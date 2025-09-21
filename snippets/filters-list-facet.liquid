@@ -1,0 +1,40 @@
+{% for value in filter.values %}
+
+  {% if value.count > 0 %}
+
+      <li class="flex items-center w-full mb-1">
+
+          <label for="Filter-{{ filter.label | escape }}-{{ forloop.index }}-{{ prefix }}" class="mb-0 cursor-pointer w-full flex items-center justify-between hover:underline">
+              
+              <input
+                  type="checkbox"
+                  class="mb-0"
+                  autocomplete="off"
+                  name="{{ value.param_name }}"
+                  value="{{ value.value }}"
+                  id="Filter-{{ filter.label | escape }}-{{ forloop.index }}-{{ prefix }}"
+                  data-filter-id="{{ filter.label | escape }}-{{ value.value | escape }}"
+                  data-filter-name="{{ filter.label | escape }}"
+                  {% if value.active %}
+                      checked
+                  {% endif %}
+                  {% if value.count == 0 and value.active == false %}
+                      disabled
+                  {% endif %}
+              >
+
+              <div class="flex items-center gap-1 w-full">
+                  
+                  <span class="block">{{ value.label | escape }}</span>
+
+                  <span class="">({{ value.count }})</span>
+
+              </div>
+              
+          </label>
+
+      </li>
+
+  {% endif %}
+
+{% endfor %}

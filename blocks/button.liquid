@@ -1,0 +1,171 @@
+{%- assign btnStyle = block.settings.style_class -%}
+{%- assign tabletBtnStyle = block.settings.tablet_style_class -%}
+{%- assign desktopBtnStyle = block.settings.desktop_style_class -%}
+
+<a href="{{ block.settings.link }}" class="btn {% if btnStyle == 'ghost' %}btn-ghost{% endif %} {% if btnStyle == 'neutral' %}btn-neutral{% endif %} {% if btnStyle == 'action' %}btn-action{% endif %} {% if btnStyle == 'link' %}btn-link{% endif %} {% if btnStyle == 'link-inverse' %}btn-link-inverse{% endif %} {% if tabletBtnStyle == 'ghost' %}tablet:btn-ghost{% endif %} {% if tabletBtnStyle == 'neutral' %}tablet:btn-neutral{% endif %} {% if tabletBtnStyle == 'action' %}tablet:btn-action{% endif %} {% if tabletBtnStyle == 'link' %}tablet:btn-link{% endif %} {% if tabletBtnStyle == 'link-inverse' %}tablet:btn-link-inverse{% endif %} {% if desktopBtnStyle == 'ghost' %}desktop:btn-ghost{% endif %} {% if desktopBtnStyle == 'neutral' %}desktop:btn-neutral{% endif %} {% if desktopBtnStyle == 'action' %}desktop:btn-action{% endif %} {% if desktopBtnStyle == 'link' %}desktop:btn-link{% endif %} {% if desktopBtnStyle == 'link-inverse' %}desktop:btn-link-inverse{% endif %}"
+	{%- if block.settings.open_in_new_tab -%}
+		target="_blank" rel="noopener noreferrer"
+	{%- endif -%}
+>
+  {%- if block.settings.icon -%}
+    <img src="{{ block.settings.icon | img_url: 'master' }}" alt="{{ block.settings.label }}" width="24" height="24" class="size-5 block {% if block.settings.icon_position == 'right' %}order-1{% endif %}">
+  {%- endif -%}
+  {{ block.settings.label }}
+</a>
+
+{% schema %}
+{
+	"name": "Button",
+	"tag": null,
+	"settings": [
+		{
+			"type": "url",
+			"id": "link",
+			"label": "Link"
+		},
+		{
+			"type": "text",
+			"id": "label",
+			"label": "Label",
+			"default": "Button label"
+		},
+		{
+			"type": "select",
+			"id": "style_class",
+			"label": "Style",
+			"options": [
+				{
+					"value": "default",
+					"label": "Default"
+				},
+				{
+					"value": "ghost",
+					"label": "Ghost"
+				},
+				{
+					"value": "neutral",
+					"label": "Neutral"
+				},
+				{
+					"value": "action",
+					"label": "Action"
+				},
+				{
+					"value": "link",
+					"label": "Link"
+				},
+        {
+					"value": "link-inverse",
+					"label": "Link Inverse"
+        }
+			],
+			"default": "default"
+		},
+		{
+			"type": "checkbox",
+			"id": "open_in_new_tab",
+			"label": "Open this link in a new window",
+			"default": false
+		},
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+		{
+			"type": "select",
+			"id": "icon_position",
+			"label": "Icon position",
+			"options": [
+				{
+					"value": "left",
+					"label": "Before"
+				},
+				{
+					"value": "right",
+					"label": "After"
+				}
+			],
+			"default": "left"
+		},
+    {
+      "type": "header",
+      "content": "Tablet"
+    },
+		{
+			"type": "select",
+			"id": "tablet_style_class",
+			"label": "Style",
+			"options": [
+				{
+					"value": "default",
+					"label": "Default"
+				},
+				{
+					"value": "ghost",
+					"label": "Ghost"
+				},
+				{
+					"value": "neutral",
+					"label": "Neutral"
+				},
+				{
+					"value": "action",
+					"label": "Action"
+				},
+				{
+					"value": "link",
+					"label": "Link"
+				},
+        {
+					"value": "link-inverse",
+					"label": "Link Inverse"
+        }
+			],
+			"default": "default"
+		},
+    {
+      "type": "header",
+      "content": "Desktop"
+    },
+		{
+			"type": "select",
+			"id": "desktop_style_class",
+			"label": "Style",
+			"options": [
+				{
+					"value": "default",
+					"label": "Default"
+				},
+				{
+					"value": "ghost",
+					"label": "Ghost"
+				},
+				{
+					"value": "neutral",
+					"label": "Neutral"
+				},
+				{
+					"value": "action",
+					"label": "Action"
+				},
+				{
+					"value": "link",
+					"label": "Link"
+				},
+        {
+					"value": "link-inverse",
+					"label": "Link Inverse"
+        }
+			],
+			"default": "default"
+		}
+	],
+	"presets": [
+		{
+			"name": "Button",
+			"settings": { }
+		}
+	]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+@layer components {
+
+    .product-card {
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    .product-card:hover {
+        @apply transform scale-105 shadow-lg;
+    }
+
+    .product-card-link {
+        @apply block transition-transform duration-300;
+    }
+
+    .product-card-link:hover {
+        @apply transform scale-105;
+    }
+
+    .product-image-container {
+        @apply relative overflow-hidden rounded-md;
+        aspect-ratio: 1;
+    }
+
+    .product-image {
+        @apply w-full h-full object-cover transition-opacity duration-300 ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .product-image-primary {
+        z-index: 2;
+        opacity: 1;
+    }
+
+    .product-image-secondary {
+        z-index: 1;
+        opacity: 0;
+    }
+
+    .product-card-link:hover .product-image-primary {
+        opacity: 0;
+    }
+
+    .product-card-link:hover .product-image-secondary {
+        opacity: 1;
+    }
+
+    /* Fallback for products without second image */
+    .product-card-link:hover .product-image-primary:only-child {
+        opacity: 1;
+    }
+
+    /* Enhanced hover effects */
+    .product-card:hover .product-image {
+        @apply shadow-md;
+    }
+
+    /* Mobile touch behavior */
+    @media (hover: none) and (pointer: coarse) {
+        .product-card-link:active .product-image-primary {
+            opacity: 0;
+        }
+
+        .product-card-link:active .product-image-secondary {
+            opacity: 1;
+        }
+    }
+
+} 

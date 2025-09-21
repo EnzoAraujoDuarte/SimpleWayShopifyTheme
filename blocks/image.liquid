@@ -1,0 +1,75 @@
+<div class="flex flex-col gap-5">
+	{% if block.settings.link %}
+		<a href="{{ block.settings.link }}" class="block">
+	{% endif %}
+
+	{% if block.settings.mobile_image or block.settings.tablet_image or block.settings.desktop_image %}
+		<picture>
+			{% if block.settings.desktop_image %}
+				<source
+					media="(min-width: 1024px)"
+					srcset="{{ block.settings.desktop_image | image_url: width: 1920 }}"
+				>
+			{% endif %}
+
+			{% if block.settings.tablet_image %}
+				<source
+					media="(min-width: 768px)"
+					srcset="{{ block.settings.tablet_image | image_url: width: 1024 }}"
+				>
+			{% endif %}
+
+			{% if block.settings.mobile_image %}
+				<source
+					srcset="{{ block.settings.mobile_image | image_url: width: 767 }}"
+				>
+			{% endif %}
+
+			<img
+				src="{{ block.settings.mobile_image | default: block.settings.tablet_image | default: block.settings.desktop_image | image_url }}"
+				alt="{{ block.settings.mobile_image.alt | default: block.settings.tablet_image.alt | default: block.settings.desktop_image.alt }}"
+				class="w-full block"
+				loading="lazy"
+				width="{{ block.settings.desktop_image.width }}"
+				height="{{ block.settings.desktop_image.height }}"
+			>
+		</picture>
+	{% endif %}
+
+	{% if block.settings.link %}
+		</a>
+	{% endif %}
+</div>
+
+{% schema %}
+{
+	"name": "Image",
+	"settings": [
+		{
+			"type": "image_picker",
+			"id": "mobile_image",
+			"label": "Mobile Image"
+		},
+		{
+			"type": "image_picker",
+			"id": "tablet_image",
+			"label": "Tablet Image"
+		},
+		{
+			"type": "image_picker",
+			"id": "desktop_image",
+			"label": "Desktop Image"
+		},
+		{
+			"type": "url",
+			"id": "link",
+			"label": "Link"
+		}
+	],
+	"presets": [
+		{
+			"name": "Image"
+		}
+	]
+}
+{% endschema %}

@@ -1,0 +1,345 @@
+<div class="relative overflow-hidden">
+
+	{%- assign background_image = block.settings.mobile_background_image -%}
+	{%- assign video_url = block.settings.mobile_video_url -%}
+
+	{%- assign tablet_background_image = block.settings.tablet_background_image | default: background_image -%}
+	{%- assign tablet_video_url = block.settings.tablet_video_url | default: video_url -%}
+
+	{%- assign desktop_background_image = block.settings.background_image | default: tablet_background_image -%}
+	{%- assign desktop_video_url = block.settings.video_url | default: tablet_video_url -%}
+
+	{% comment %} Mobile Background {% endcomment %}
+	<div class="tablet:hidden">
+
+		{% if background_image != blank %}
+
+			<video class="w-full h-full" autoplay loop muted playsinline poster="{% if background_image %}{{ background_image | image_url: width: 1000 }}{% endif %}">
+				<source src="{{ video_url }}" type="video/mp4">
+			</video>
+
+		{% elsif background_image %}
+
+			{{ background_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'w-full block' }}
+
+		{% else %}
+
+			<div class="w-full h-[400px] bg-gray-200"></div>
+
+		{% endif %}
+
+	</div>
+
+	{% comment %} Tablet Background {% endcomment %}
+	<div class="hidden tablet:block laptop:hidden">
+
+		{% if tablet_video_url != blank %}
+
+			<video class="w-full h-full" autoplay loop muted playsinline poster="{% if tablet_background_image %}{{ tablet_background_image | image_url: width: 1500 }}{% endif %}">
+				<source src="{{ tablet_video_url }}" type="video/mp4">
+			</video>
+
+		{% elsif tablet_background_image %}
+
+			{{ tablet_background_image | image_url: width: 1500 | image_tag: loading: 'lazy', class: 'w-full block' }}
+
+		{% else %}
+
+			<div class="w-full h-[500px] bg-gray-200"></div>
+
+		{% endif %}
+
+	</div>
+
+	{% comment %} Desktop Background {% endcomment %}
+	<div class="hidden laptop:block">
+
+		{% if desktop_video_url != blank %}
+
+			<div class="w-full h-full">
+				<video class="w-full h-full wide:h-[800px] wide:object-cover" autoplay loop muted playsinline poster="{% if desktop_background_image %}{{ desktop_background_image | image_url: width: 2000 }}{% endif %}">
+					<source src="{{ desktop_video_url }}" type="video/mp4">
+				</video>
+			</div>
+
+		{% elsif desktop_background_image %}
+
+			{{ desktop_background_image | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'w-full block' }}
+
+		{% else %}
+
+			<div class="w-full h-[600px] bg-gray-200"></div>
+
+		{% endif %}
+
+	</div>
+
+	{%- assign alignment = block.settings.alignment -%}
+	{%- assign text_alignment = block.settings.text_alignment -%}
+	{%- assign content_alignment = block.settings.content_alignment -%}
+	{%- assign background_color = block.settings.background_color -%}
+	{%- assign max_width = block.settings.max_width -%}
+
+	{% comment %} Text Content {% endcomment %}
+	<div class="flex items-center justify-center px-4 py-8 tablet:absolute tablet:inset-0 tablet:!bg-transparent" style="background-color: {{ background_color }}">
+
+		<div class="container mx-auto flex flex-col items-center {% case alignment -%}{%- when 'start' -%}justify-start text-left{%- when 'center' -%}justify-center text-center{%- when 'end' -%}justify-end text-right{%- endcase %} 
+    {% case text_alignment -%}{%- when 'left' -%}tablet:text-left{%- when 'center' -%}tablet:text-center{%- when 'right' -%}tablet:text-right{%- endcase %} {% case content_alignment -%}{%- when 'left' -%}tablet:items-start{%- when 'center' -%}tablet:items-center{%- when 'right' -%}tablet:items-end{%- endcase -%}">
+			
+			<div class="tablet:px-20 laptop:px-32" style="max-width: {{ max_width }}px">
+
+				<div class="flex flex-col">
+
+					<div class="block" style="order: {% if block.settings.show_additional_content_before %}1{% endif %}">
+
+						{% content_for "block", type: "heading", id: "heading" %}
+						
+						{% content_for "block", type: "text", id: "subtext" %}
+						
+						{% capture buttons %}
+							{% content_for "block", type: "button", id: "button_1" %}
+							{% content_for "block", type: "button", id: "button_2" %}
+						{% endcapture %}
+
+						{% if buttons != blank %}
+							<div class="mt-6 inline-flex flex-wrap gap-4 {% case alignment -%}{%- when 'start' -%}justify-start{%- when 'center' -%}justify-center{%- when 'end' -%}justify-end{%- endcase %} {% case text_alignment -%}{%- when 'left' -%}tablet:justify-start{%- when 'center' -%}tablet:justify-center{%- when 'right' -%}tablet:justify-end{%- endcase %}">
+								{{ buttons }}
+							</div>
+						{% endif %}
+
+					</div>
+
+					<div class="block">
+						{% content_for 'blocks' %}
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+{% schema %}
+{
+	"name": "Banner",
+	"settings": [
+    {
+      "type": "checkbox",
+      "id": "advanced_settings",
+      "label": "Advanced Settings",
+      "default": false
+    },
+		{
+			"type": "image_picker",
+			"id": "mobile_background_image",
+			"label": "Image"
+		},
+		{
+			"type": "url",
+			"id": "mobile_video_url",
+			"label": "Video URL",
+			"info": "Upload video file to Shopify Files first, then paste the URL here"
+		},
+		{
+			"type": "color",
+			"id": "background_color",
+			"label": "Background"
+		},
+		{
+			"type": "select",
+			"id": "alignment",
+			"label": "Alignment",
+			"options": [
+				{
+					"value": "start",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "end",
+					"label": "Right"
+				}
+			],
+			"default": "center"
+		},
+		{
+			"type": "number",
+			"id": "max_width",
+			"label": "Max Width",
+			"default": 520,
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "checkbox",
+			"id": "show_additional_content_before",
+			"label": "Show Additional Content Before",
+			"default": false,
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "header",
+			"content": "Tablet",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "image_picker",
+			"id": "tablet_background_image",
+			"label": "Image",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "url",
+			"id": "tablet_video_url",
+			"label": "Video URL",
+			"info": "Upload video file to Shopify Files first, then paste the URL here",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "select",
+			"id": "tablet_alignment",
+			"label": "Alignment",
+			"options": [
+				{
+					"value": "start",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "end",
+					"label": "Right"
+				}
+			],
+			"default": "center",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "select",
+			"id": "tablet_content_alignment",
+			"label": "Content Alignment",
+			"options": [
+				{
+					"value": "left",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "right",
+					"label": "Right"
+				}
+			],
+			"default": "center",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "header",
+			"content": "Desktop",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "image_picker",
+			"id": "background_image",
+			"label": "Image",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "url",
+			"id": "video_url",
+			"label": "Video URL",
+			"info": "Upload video file to Shopify Files first, then paste the URL here",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "select",
+			"id": "text_alignment",
+			"label": "Text Alignment",
+			"options": [
+				{
+					"value": "left",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "right",
+					"label": "Right"
+				}
+			],
+			"default": "center",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "select",
+			"id": "content_alignment",
+			"label": "Content Alignment",
+			"options": [
+				{
+					"value": "left",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "right",
+					"label": "Right"
+				}
+			],
+			"default": "center",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		}
+	],
+	"blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "type": "@theme"
+      }
+    ],
+	"presets": [
+		{
+			"name": "Banner",
+			"blocks": [
+				{
+					"type": "button",
+					"static": true,
+					"id": "button_1",
+					"settings": {
+						"label": "Shop All",
+						"style_class": "link",
+						"tablet_style_class": "link-inverse",
+						"desktop_style_class": "link-inverse"
+					}
+				},
+				{
+					"type": "button",
+					"static": true,
+					"id": "button_2",
+					"settings": {
+						"label": "Design Now",
+						"style_class": "link",
+						"tablet_style_class": "link-inverse",
+						"desktop_style_class": "link-inverse"
+					}
+				}
+			]
+		}
+	]
+}
+{% endschema %}

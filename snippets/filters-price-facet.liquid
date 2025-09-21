@@ -1,0 +1,99 @@
+{%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
+
+<div class="flex flex-col gap-6 p-4 bg-gray-50 rounded-xl">
+
+    <div class="text-center">
+        <span class="text-sm text-gray-600 font-medium">Maximum price available</span>
+        <div class="text-lg font-bold text-golden-600 mt-1">{{ max_price_amount }}</div>
+    </div>
+
+    <price-range class="flex flex-col gap-4">
+
+        <div class="flex items-center gap-4">
+            <div class="price-input-group flex-1">
+                <label for="{{ filter.label | escape }}-min" class="block text-sm font-medium text-gray-700 mb-2">From</label>
+                <div class="relative">
+                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">{{ cart.currency.symbol }}</span>
+            <input
+                name="{{ filter.min_value.param_name }}"
+                        id="{{ filter.label | escape }}-min"
+                {%- if filter.min_value.value -%}
+                value="{{ filter.min_value.value | money_without_currency }}"
+                {%- endif -%}
+                type="text"
+                inputmode="decimal"
+                placeholder="0"
+                data-pattern="\d| |,|\."
+                data-min="0"
+                data-max="{{ filter.range_max | money_without_currency }}"
+                        class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-400 focus:border-golden-400 transition-all duration-300 bg-white shadow-sm hover:shadow-md"
+                    >
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center mt-6">
+                <div class="w-4 h-px bg-gray-300"></div>
+        </div>
+
+            <div class="price-input-group flex-1">
+                <label for="{{ filter.label | escape }}-max" class="block text-sm font-medium text-gray-700 mb-2">To</label>
+                <div class="relative">
+                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">{{ cart.currency.symbol }}</span>
+            <input
+                name="{{ filter.max_value.param_name }}"
+                        id="{{ filter.label | escape }}-max"
+                {%- if filter.max_value.value -%}
+                value="{{ filter.max_value.value | money_without_currency }}"
+                {%- endif -%}
+                type="text"
+                inputmode="decimal"
+                placeholder="{{ filter.range_max | money_without_currency }}"
+                data-pattern="\d| |,|\."
+                data-min="0"
+                data-max="{{ filter.range_max | money_without_currency }}"
+                        class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-golden-400 focus:border-golden-400 transition-all duration-300 bg-white shadow-sm hover:shadow-md"
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Visual price range indicator -->
+        <div class="price-range-visual mt-4">
+            <div class="flex justify-between text-xs text-gray-500 mb-2">
+                <span>{{ cart.currency.symbol }}0</span>
+                <span>{{ max_price_amount }}</span>
+            </div>
+            <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-golden-400 to-golden-600 rounded-full transition-all duration-300" style="width: 100%"></div>
+            </div>
+        </div>
+
+    </price-range>
+
+</div>
+
+<style>
+    .price-input-group input:focus {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+    }
+    
+    .price-input-group input::placeholder {
+        color: #9ca3af;
+    }
+    
+    .price-range-visual {
+        position: relative;
+    }
+    
+    .price-range-visual::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(245, 158, 11, 0.3), transparent);
+        transform: translateY(-50%);
+    }
+</style>

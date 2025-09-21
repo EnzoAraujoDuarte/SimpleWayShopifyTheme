@@ -1,0 +1,16 @@
+:root {
+  --swiper-theme-color: #231F20;
+  --swiper-navigation-size: 36px;
+  --swiper-navigation-sides-offset: 10px;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  background: #F9F3F2;
+  border-radius: 100%;
+  width: 36px;
+  height: 36px;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 16px;
+}

@@ -1,0 +1,76 @@
+[
+	{
+		"name": "theme_info",
+		"theme_name": "enzo-e-commerce",
+		"theme_version": "1.0.0",
+		"theme_author": "Enzo Araujo",
+		"theme_documentation_url": "http://simpleway.solutions/",
+		"theme_support_url": "http://simpleway.solutions/"
+	},
+	{
+		"name": "theme_settings",
+		"settings": [
+			{
+				"type": "header",
+				"content": "Header"
+			},
+			{
+				"type": "image_picker",
+				"id": "logo",
+				"label": "Logo",
+				"info": "Recommended format: SVG for best quality at any size"
+			}
+		]
+	},
+	{
+		"name": "contact_info",
+		"settings": [
+			{
+				"type": "header",
+				"content": "Informações de Contato"
+			},
+			{
+				"type": "text",
+				"id": "contact_email",
+				"label": "Email de Contato",
+				"default": "contato@loja.com",
+				"info": "Email principal para atendimento ao cliente"
+			},
+			{
+				"type": "text",
+				"id": "contact_phone",
+				"label": "Telefone",
+				"placeholder": "(00) 00000-0000",
+				"info": "Número de telefone para contato (opcional)"
+			},
+			{
+				"type": "text",
+				"id": "contact_whatsapp",
+				"label": "WhatsApp",
+				"placeholder": "5511999999999",
+				"info": "Número do WhatsApp com código do país (opcional)"
+			},
+			{
+				"type": "textarea",
+				"id": "contact_address",
+				"label": "Endereço",
+				"placeholder": "Rua, número, bairro, cidade - CEP",
+				"info": "Endereço completo da empresa (opcional)"
+			},
+			{
+				"type": "text",
+				"id": "contact_hours",
+				"label": "Horário de Atendimento",
+				"default": "Segunda a Sexta-feira de 09H às 17H (exceto feriados)",
+				"info": "Horário de funcionamento do atendimento"
+			},
+			{
+				"type": "text",
+				"id": "contact_response_time",
+				"label": "Tempo de Resposta",
+				"default": "48 horas úteis",
+				"info": "Tempo médio de resposta para contatos"
+			}
+		]
+	}
+]

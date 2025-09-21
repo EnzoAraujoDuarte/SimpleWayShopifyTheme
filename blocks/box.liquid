@@ -1,0 +1,737 @@
+{%- assign settings = block.settings -%}
+{%- assign orientation = settings.orientation | append: ' ' | append: settings.orientation_tablet | append: ' ' | append: settings.orientation_desktop -%}
+{%- assign justify = settings.justify_content | append: ' ' | append: settings.justify_content_tablet | append: ' ' | append: settings.justify_content_desktop -%}
+{%- assign align = settings.align_items | append: ' ' | append: settings.align_items_tablet | append: ' ' | append: settings.align_items_desktop -%}
+{%- assign wrap = settings.flex_wrap | append: ' ' | append: settings.flex_wrap_tablet | append: ' ' | append: settings.flex_wrap_desktop -%}
+{%- assign gap = settings.gap | append: ' ' | append: settings.gap_tablet | append: ' ' | append: settings.gap_desktop -%}
+{%- assign background = settings.background_color -%}
+{%- assign background_tablet = settings.background_color_tablet -%}
+{%- assign background_desktop = settings.background_color_desktop -%}
+{%- assign max_width = settings.max_width | append: ' ' | append: settings.max_width_tablet | append: ' ' | append: settings.max_width_desktop -%}
+{%- assign padding_top = settings.padding_top | append: ' ' | append: settings.padding_top_tablet | append: ' ' | append: settings.padding_top_desktop -%}
+{%- assign padding_bottom = settings.padding_bottom | append: ' ' | append: settings.padding_bottom_tablet | append: ' ' | append: settings.padding_bottom_desktop -%}
+{%- assign padding_left = settings.padding_left | append: ' ' | append: settings.padding_left_tablet | append: ' ' | append: settings.padding_left_desktop -%}
+{%- assign padding_right = settings.padding_right | append: ' ' | append: settings.padding_right_tablet | append: ' ' | append: settings.padding_right_desktop -%}
+{%- assign shrink = settings.shrink -%}
+{%- assign id = block.id -%}
+{%- assign height = settings.height | append: ' ' | append: settings.height_tablet | append: ' ' | append: settings.height_desktop -%}
+{%- assign boxOrder = settings.order | append: ' ' | append: settings.order_tablet | append: ' ' | append: settings.order_desktop -%}
+{%- assign hide_on_mobile = settings.hide_on_mobile -%}
+{%- assign hide_on_tablet = settings.hide_on_tablet -%}
+{%- assign hide_on_desktop = settings.hide_on_desktop -%}
+{%- assign position = settings.position -%}
+
+<div id="shopify-block-{{ id }}" class="flex w-full {{ position }} {{ orientation }} {{ justify }} {{ align }} {{ wrap }} {{ gap }} {{ max_width }} {{ padding_top }} {{ padding_bottom }} {{ padding_left }} {{ padding_right }} {{ height }} {{ boxOrder }}" {{ block.shopify_attributes }}>
+  
+  {% content_for 'blocks' %}
+
+  {% style %}
+
+    {%- if background != blank -%}
+      #shopify-block-{{ id }} {
+        background-color: {{ background }};
+      }
+    {%- endif -%}
+
+    {%- if background_tablet != blank -%}
+      @media (min-width: 768px) {
+        #shopify-block-{{ id }} {
+          background-color: {{ background_tablet }};
+        }
+      }
+    {%- endif -%}
+
+    {%- if background_desktop != blank -%}
+      @media (min-width: 1024px) {
+        #shopify-block-{{ id }} {
+          background-color: {{ background_desktop }};
+        }
+      }
+    {%- endif -%}
+
+    {%- if shrink != blank -%}
+      #shopify-block-{{ id }} {
+        flex-shrink: {{ shrink }};
+        width: auto;
+        margin-left: 0;
+        margin-right: 0;
+      }
+    {%- endif -%}
+
+    {%- if hide_on_mobile == true -%}
+      @media (max-width: 767px) {
+        #shopify-block-{{ id }} {
+          display: none;
+        }
+      }
+    {%- endif -%}
+
+    {%- if hide_on_tablet == true -%}
+      @media (min-width: 768px) and (max-width: 1023px) {
+        #shopify-block-{{ id }} {
+          display: none;
+        }
+      }
+    {%- endif -%}
+
+    {%- if hide_on_desktop == true -%}
+      @media (min-width: 1024px) {
+        #shopify-block-{{ id }} {
+          display: none;
+        }
+      }
+    {%- endif -%}
+
+  {% endstyle %}
+
+</div>
+
+{% schema %}
+{
+	"name": "Box",
+  "tag": null,
+	"settings": [
+    {
+      "type": "checkbox",
+      "id": "advanced_settings",
+      "label": "Advanced Settings",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "shrink",
+      "label": "Shrink",
+      "options": [
+        { "value": "", "label": "Default" },
+        { "value": "0", "label": "Disabled" },
+        { "value": "1", "label": "Enabled" }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        { "value": "mr-auto", "label": "Left" },
+        { "value": "ml-auto mr-auto", "label": "Center" },
+        { "value": "ml-auto", "label": "Right" }
+      ],
+      "default": "ml-auto mr-auto",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+			"type": "header",
+			"content": "Mobile",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "select",
+			"id": "orientation",
+			"label": "Orientation",
+			"options": [
+				{ "value": "flex-row", "label": "Row" },
+				{ "value": "flex-col", "label": "Column" }
+			]
+		},
+    {
+			"type": "select",
+			"id": "justify_content",
+			"label": "Justify Content",
+			"options": [
+				{ "value": "justify-start", "label": "Start" },
+				{ "value": "justify-end", "label": "End" },
+				{ "value": "justify-center", "label": "Center" },
+				{ "value": "justify-between", "label": "Space Between" }
+			]
+		},
+    {
+			"type": "select",
+			"id": "align_items",
+			"label": "Align Items",
+			"options": [
+				{ "value": "items-start", "label": "Start" },
+				{ "value": "items-center", "label": "Center" },
+				{ "value": "items-end", "label": "End" }
+			]
+		},
+    {
+			"type": "select",
+			"id": "flex_wrap",
+			"label": "Wrap",
+			"options": [
+				{ "value": "flex-nowrap", "label": "No Wrap" },
+				{ "value": "flex-wrap", "label": "Wrap" }
+			]
+		},
+    {
+			"type": "select",
+			"id": "gap",
+			"label": "Gap",
+			"options": [
+				{ "value": "gap-0", "label": "None" },
+				{ "value": "gap-1", "label": "4px" },
+				{ "value": "gap-2", "label": "8px" },
+				{ "value": "gap-3", "label": "12px" },
+				{ "value": "gap-4", "label": "16px" },
+				{ "value": "gap-5", "label": "20px" },
+				{ "value": "gap-10", "label": "40px" },
+				{ "value": "gap-15", "label": "60px" },
+				{ "value": "gap-20", "label": "80px" }
+			],
+      "default": "gap-0"
+		},
+    {
+      "type": "select",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "options": [
+        {"value": "pt-0", "label": "0px"},
+        {"value": "pt-1", "label": "4px"},
+        {"value": "pt-2", "label": "8px"},
+        {"value": "pt-3", "label": "12px"},
+        {"value": "pt-4", "label": "16px"},
+        {"value": "pt-5", "label": "20px"},
+        {"value": "pt-10", "label": "40px"},
+        {"value": "pt-15", "label": "60px"},
+        {"value": "pt-20", "label": "80px"}
+      ],
+      "default": "pt-0"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "options": [
+        {"value": "pb-0", "label": "0px"},
+        {"value": "pb-1", "label": "4px"},
+        {"value": "pb-2", "label": "8px"},
+        {"value": "pb-3", "label": "12px"},
+        {"value": "pb-4", "label": "16px"},
+        {"value": "pb-5", "label": "20px"},
+        {"value": "pb-10", "label": "40px"},
+        {"value": "pb-15", "label": "60px"},
+        {"value": "pb-20", "label": "80px"}
+      ],
+      "default": "pb-0"
+    },
+    {
+      "type": "select",
+      "id": "padding_left",
+      "label": "Padding Left",
+      "options": [
+        {"value": "pl-0", "label": "0px"},
+        {"value": "pl-1", "label": "4px"},
+        {"value": "pl-2", "label": "8px"},
+        {"value": "pl-3", "label": "12px"},
+        {"value": "pl-4", "label": "16px"},
+        {"value": "pl-5", "label": "20px"},
+        {"value": "pl-10", "label": "40px"},
+        {"value": "pl-15", "label": "60px"},
+        {"value": "pl-20", "label": "80px"}
+      ],
+      "default": "pl-0"
+    },
+    {
+      "type": "select",
+      "id": "padding_right",
+      "label": "Padding Right",
+      "options": [
+        {"value": "pr-0", "label": "0px"},
+        {"value": "pr-1", "label": "4px"},
+        {"value": "pr-2", "label": "8px"},
+        {"value": "pr-3", "label": "12px"},
+        {"value": "pr-4", "label": "16px"},
+        {"value": "pr-5", "label": "20px"},
+        {"value": "pr-10", "label": "40px"},
+        {"value": "pr-15", "label": "60px"},
+        {"value": "pr-20", "label": "80px"}
+      ],
+      "default": "pr-0"
+    },
+    {
+      "type": "select",
+      "id": "max_width",
+      "label": "Max Width",
+      "options": [
+        { "value": "", "label": "Default" },
+        { "value": "max-w-xs", "label": "320px" },
+        { "value": "max-w-sm", "label": "384px" },
+        { "value": "max-w-md", "label": "448px" },
+        { "value": "max-w-lg", "label": "512px" },
+        { "value": "max-w-xl", "label": "576px" },
+        { "value": "max-w-2xl", "label": "672px" },
+        { "value": "max-w-3xl", "label": "768px" },
+        { "value": "max-w-4xl", "label": "896px" },
+        { "value": "max-w-5xl", "label": "1024px" },
+        { "value": "max-w-6xl", "label": "1152px" }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "", "label": "Default" },
+        { "value": "h-full", "label": "Full Height" }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+			"type": "color",
+			"id": "background_color",
+			"label": "Background Color"
+		},
+    {
+      "type": "select",
+      "id": "order",
+      "label": "Order",
+      "options": [
+        { "value": "", "label": "Default" },
+        { "value": "order-1", "label": "1" },
+        { "value": "order-2", "label": "2" },
+        { "value": "order-3", "label": "3" },
+        { "value": "order-4", "label": "4" },
+        { "value": "order-5", "label": "5" },
+        { "value": "order-6", "label": "6" }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on Mobile",
+      "default": false,
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+			"type": "header",
+			"content": "Tablet",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "select",
+			"id": "orientation_tablet",
+			"label": "Orientation",
+			"options": [
+				{ "value": "", "label": "Same as Mobile" },
+				{ "value": "tablet:flex-row", "label": "Row" },
+				{ "value": "tablet:flex-col", "label": "Column" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "justify_content_tablet",
+			"label": "Justify Content",
+			"options": [
+				{ "value": "", "label": "Same as Mobile" },
+				{ "value": "tablet:justify-start", "label": "Start" },
+				{ "value": "tablet:justify-end", "label": "End" },
+				{ "value": "tablet:justify-center", "label": "Center" },
+				{ "value": "tablet:justify-between", "label": "Space Between" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "align_items_tablet",
+			"label": "Align Items",
+			"options": [
+				{ "value": "", "label": "Same as Mobile" },
+				{ "value": "tablet:items-start", "label": "Start" },
+				{ "value": "tablet:items-center", "label": "Center" },
+				{ "value": "tablet:items-end", "label": "End" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "flex_wrap_tablet",
+			"label": "Wrap",
+			"options": [
+				{ "value": "", "label": "Same as Mobile" },
+				{ "value": "tablet:flex-nowrap", "label": "No Wrap" },
+				{ "value": "tablet:flex-wrap", "label": "Wrap" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "gap_tablet",
+			"label": "Gap",
+			"options": [
+				{ "value": "", "label": "Same as Mobile" },
+				{ "value": "tablet:gap-0", "label": "None" },
+				{ "value": "tablet:gap-1", "label": "4px" },
+				{ "value": "tablet:gap-2", "label": "8px" },
+				{ "value": "tablet:gap-3", "label": "12px" },
+				{ "value": "tablet:gap-4", "label": "16px" },
+				{ "value": "tablet:gap-5", "label": "20px" },
+				{ "value": "tablet:gap-10", "label": "40px" },
+				{ "value": "tablet:gap-15", "label": "60px" },
+				{ "value": "tablet:gap-20", "label": "80px" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+      "type": "select",
+      "id": "padding_top_tablet",
+      "label": "Padding Top",
+      "options": [
+        {"value": "", "label": "Same as Mobile"},
+        {"value": "tablet:pt-0", "label": "0px"},
+        {"value": "tablet:pt-1", "label": "4px"},
+        {"value": "tablet:pt-2", "label": "8px"},
+        {"value": "tablet:pt-3", "label": "12px"},
+        {"value": "tablet:pt-4", "label": "16px"},
+        {"value": "tablet:pt-5", "label": "20px"},
+        {"value": "tablet:pt-10", "label": "40px"},
+        {"value": "tablet:pt-15", "label": "60px"},
+        {"value": "tablet:pt-20", "label": "80px"}
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom_tablet",
+      "label": "Padding Bottom",
+      "options": [
+        {"value": "", "label": "Same as Mobile"},
+        {"value": "tablet:pb-0", "label": "0px"},
+        {"value": "tablet:pb-1", "label": "4px"},
+        {"value": "tablet:pb-2", "label": "8px"},
+        {"value": "tablet:pb-3", "label": "12px"},
+        {"value": "tablet:pb-4", "label": "16px"},
+        {"value": "tablet:pb-5", "label": "20px"},
+        {"value": "tablet:pb-10", "label": "40px"},
+        {"value": "tablet:pb-15", "label": "60px"},
+        {"value": "tablet:pb-20", "label": "80px"}
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "padding_left_tablet",
+      "label": "Padding Left",
+      "options": [
+        {"value": "", "label": "Same as Mobile"},
+        {"value": "tablet:pl-0", "label": "0px"},
+        {"value": "tablet:pl-1", "label": "4px"},
+        {"value": "tablet:pl-2", "label": "8px"},
+        {"value": "tablet:pl-3", "label": "12px"},
+        {"value": "tablet:pl-4", "label": "16px"},
+        {"value": "tablet:pl-5", "label": "20px"},
+        {"value": "tablet:pl-10", "label": "40px"},
+        {"value": "tablet:pl-15", "label": "60px"},
+        {"value": "tablet:pl-20", "label": "80px"}
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "padding_right_tablet",
+      "label": "Padding Right",
+      "options": [
+        {"value": "", "label": "Same as Mobile"},
+        {"value": "tablet:pr-0", "label": "0px"},
+        {"value": "tablet:pr-1", "label": "4px"},
+        {"value": "tablet:pr-2", "label": "8px"},
+        {"value": "tablet:pr-3", "label": "12px"},
+        {"value": "tablet:pr-4", "label": "16px"},
+        {"value": "tablet:pr-5", "label": "20px"},
+        {"value": "tablet:pr-10", "label": "40px"},
+        {"value": "tablet:pr-15", "label": "60px"},
+        {"value": "tablet:pr-20", "label": "80px"}
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "max_width_tablet",
+      "label": "Max Width",
+      "options": [
+        { "value": "", "label": "Same as Mobile" },
+        { "value": "tablet:max-w-xs", "label": "320px" },
+        { "value": "tablet:max-w-sm", "label": "384px" },
+        { "value": "tablet:max-w-md", "label": "448px" },
+        { "value": "tablet:max-w-lg", "label": "512px" },
+        { "value": "tablet:max-w-xl", "label": "576px" },
+        { "value": "tablet:max-w-2xl", "label": "672px" },
+        { "value": "tablet:max-w-3xl", "label": "768px" },
+        { "value": "tablet:max-w-4xl", "label": "896px" },
+        { "value": "tablet:max-w-5xl", "label": "1024px" },
+        { "value": "tablet:max-w-6xl", "label": "1152px" }
+      ],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "height_tablet",
+      "label": "Height",
+      "options": [
+        { "value": "", "label": "Same as Mobile" },
+        { "value": "tablet:h-full", "label": "Full Height" }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+			"type": "color",
+			"id": "background_color_tablet",
+			"label": "Background Color",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+      "type": "select",
+      "id": "order_tablet",
+      "label": "Order",
+      "options": [
+        { "value": "", "label": "Default" },
+        { "value": "tablet:order-1", "label": "1" },
+        { "value": "tablet:order-2", "label": "2" },
+        { "value": "tablet:order-3", "label": "3" },
+        { "value": "tablet:order-4", "label": "4" },
+        { "value": "tablet:order-5", "label": "5" },
+        { "value": "tablet:order-6", "label": "6" }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_tablet",
+      "label": "Hide on Tablet",
+      "default": false,
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+			"type": "header",
+			"content": "Desktop",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+		{
+			"type": "select",
+			"id": "orientation_desktop",
+			"label": "Orientation",
+			"options": [
+				{ "value": "", "label": "Same as Tablet" },
+				{ "value": "laptop:flex-row", "label": "Row" },
+				{ "value": "laptop:flex-col", "label": "Column" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "justify_content_desktop",
+			"label": "Justify Content",
+			"options": [
+				{ "value": "", "label": "Same as Tablet" },
+				{ "value": "laptop:justify-start", "label": "Start" },
+				{ "value": "laptop:justify-end", "label": "End" },
+				{ "value": "laptop:justify-center", "label": "Center" },
+				{ "value": "laptop:justify-between", "label": "Space Between" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "align_items_desktop",
+			"label": "Align Items",
+			"options": [
+				{ "value": "", "label": "Same as Tablet" },
+				{ "value": "laptop:items-start", "label": "Start" },
+				{ "value": "laptop:items-center", "label": "Center" },
+				{ "value": "laptop:items-end", "label": "End" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "flex_wrap_desktop",
+			"label": "Flex Wrap",
+			"options": [
+				{ "value": "", "label": "Same as Tablet" },
+				{ "value": "laptop:flex-nowrap", "label": "No Wrap" },
+				{ "value": "laptop:flex-wrap", "label": "Wrap" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+			"type": "select",
+			"id": "gap_desktop",
+			"label": "Gap",
+			"options": [
+				{ "value": "", "label": "Same as Tablet" },
+				{ "value": "laptop:gap-0", "label": "None" },
+				{ "value": "laptop:gap-1", "label": "4px" },
+				{ "value": "laptop:gap-2", "label": "8px" },
+				{ "value": "laptop:gap-3", "label": "12px" },
+				{ "value": "laptop:gap-4", "label": "16px" },
+				{ "value": "laptop:gap-5", "label": "20px" },
+				{ "value": "laptop:gap-10", "label": "40px" },
+				{ "value": "laptop:gap-15", "label": "60px" },
+				{ "value": "laptop:gap-20", "label": "80px" }
+			],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+      "type": "select",
+      "id": "padding_top_desktop",
+      "label": "Padding Top",
+      "options": [
+        {"value": "", "label": "Same as Tablet"},
+        {"value": "laptop:pt-0", "label": "0px"},
+        {"value": "laptop:pt-1", "label": "4px"},
+        {"value": "laptop:pt-2", "label": "8px"},
+        {"value": "laptop:pt-3", "label": "12px"},
+        {"value": "laptop:pt-4", "label": "16px"},
+        {"value": "laptop:pt-5", "label": "20px"},
+        {"value": "laptop:pt-10", "label": "40px"},
+        {"value": "laptop:pt-15", "label": "60px"},
+        {"value": "laptop:pt-20", "label": "80px"}
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom",
+      "options": [
+        {"value": "", "label": "Same as Tablet"},
+        {"value": "laptop:pb-0", "label": "0px"},
+        {"value": "laptop:pb-1", "label": "4px"},
+        {"value": "laptop:pb-2", "label": "8px"},
+        {"value": "laptop:pb-3", "label": "12px"},
+        {"value": "laptop:pb-4", "label": "16px"},
+        {"value": "laptop:pb-5", "label": "20px"},
+        {"value": "laptop:pb-10", "label": "40px"},
+        {"value": "laptop:pb-15", "label": "60px"},
+        {"value": "laptop:pb-20", "label": "80px"}
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "padding_left_desktop",
+      "label": "Padding Left",
+      "options": [
+        {"value": "", "label": "Same as Tablet"},
+        {"value": "laptop:pl-0", "label": "0px"},
+        {"value": "laptop:pl-1", "label": "4px"},
+        {"value": "laptop:pl-2", "label": "8px"},
+        {"value": "laptop:pl-3", "label": "12px"},
+        {"value": "laptop:pl-4", "label": "16px"},
+        {"value": "laptop:pl-5", "label": "20px"},
+        {"value": "laptop:pl-10", "label": "40px"},
+        {"value": "laptop:pl-15", "label": "60px"},
+        {"value": "laptop:pl-20", "label": "80px"}
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "padding_right_desktop",
+      "label": "Padding Right",
+      "options": [
+        {"value": "", "label": "Same as Tablet"},
+        {"value": "laptop:pr-0", "label": "0px"},
+        {"value": "laptop:pr-1", "label": "4px"},
+        {"value": "laptop:pr-2", "label": "8px"},
+        {"value": "laptop:pr-3", "label": "12px"},
+        {"value": "laptop:pr-4", "label": "16px"},
+        {"value": "laptop:pr-5", "label": "20px"},
+        {"value": "laptop:pr-10", "label": "40px"},
+        {"value": "laptop:pr-15", "label": "60px"},
+        {"value": "laptop:pr-20", "label": "80px"}
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "max_width_desktop",
+      "label": "Max Width",
+      "options": [
+        { "value": "", "label": "Same as Tablet" },
+        { "value": "laptop:max-w-xs", "label": "320px" },
+        { "value": "laptop:max-w-sm", "label": "384px" },
+        { "value": "laptop:max-w-md", "label": "448px" },
+        { "value": "laptop:max-w-lg", "label": "512px" },
+        { "value": "laptop:max-w-xl", "label": "576px" },
+        { "value": "laptop:max-w-2xl", "label": "672px" },
+        { "value": "laptop:max-w-3xl", "label": "768px" },
+        { "value": "laptop:max-w-4xl", "label": "896px" },
+        { "value": "laptop:max-w-5xl", "label": "1024px" },
+        { "value": "laptop:max-w-6xl", "label": "1152px" }
+      ],
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "Height",
+      "options": [
+        { "value": "", "label": "Same as Tablet" },
+        { "value": "laptop:h-full", "label": "Full Height" }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+			"type": "color",
+			"id": "background_color_desktop",
+			"label": "Background Color",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+		},
+    {
+      "type": "select",
+      "id": "order_desktop",
+      "label": "Order",
+      "options": [
+        { "value": "", "label": "Default" },
+        { "value": "laptop:order-1", "label": "1" },
+        { "value": "laptop:order-2", "label": "2" },
+        { "value": "laptop:order-3", "label": "3" },
+        { "value": "laptop:order-4", "label": "4" },
+        { "value": "laptop:order-5", "label": "5" },
+        { "value": "laptop:order-6", "label": "6" }
+      ],
+      "default": "",
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Hide on Desktop",
+      "default": false,
+      "visible_if": "{{ block.settings.advanced_settings == true }}"
+    }
+	],
+	"blocks": [
+		{
+			"type": "@app"
+		},
+		{
+			"type": "@theme"
+		}
+	],
+	"presets": [
+		{
+			"name": "Box",
+			"category": "Layout"
+		}
+	]
+}
+{% endschema %}
